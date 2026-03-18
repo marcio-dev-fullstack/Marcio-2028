@@ -33,7 +33,7 @@
 
     <nav class="main-nav">
         <div class="nav-container">
-            <div class="nav-logo">MENU</div>
+            <div class="nav-logo">MÁRCIO</div>
             <ul class="nav-menu">
                 <li><a href="index.html">INÍCIO</a></li>
                 <li><a href="videos.html">VÍDEOS</a></li>
@@ -53,7 +53,7 @@
     </section>
 
     <script>
-        // LISTA INVERTIDA: CAPA 01 (MAIS ANTIGO) É O PRIMEIRO E RECEBERÁ O NÚMERO #57
+        // LISTA DE VÍDEOS: O ÚLTIMO DA LISTA SERÁ O #58
         const vids = [
             { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/", thumb: "img/capa1.png" },
             { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/1311500697698154/&show_text=false", thumb: "img/capa2.png" },
@@ -111,17 +111,18 @@
             { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/809238495204125/&show_text=false", thumb: "img/capa54.png" },
             { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/1567188791362872/&show_text=false", thumb: "img/capa55.png" },
             { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/999747685688481/&show_text=false", thumb: "img/capa56.png" },
-            { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/838948629033710/&show_text=false", thumb: "img/capa57.png" }
+            { url: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/838948629033710/&show_text=false", thumb: "img/capa57.png" },
+            { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/", thumb: "img/capa58.png" }
         ];
 
         const grid = document.getElementById('main-grid');
         const total = vids.length;
 
-        vids.forEach((vid, i) => {
+        // INVERTE A ORDEM: O MAIS NOVO (#58) APARECE NO TOPO
+        [...vids].reverse().forEach((vid, i) => {
             const item = document.createElement('div');
             item.className = 'video-item';
             
-            // Numeração decrescente: O primeiro item da lista (Capa 01) será #57
             const num = total - i;
             const displayNum = num < 10 ? '0' + num : num;
 
