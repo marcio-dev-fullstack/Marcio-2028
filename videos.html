@@ -6,106 +6,99 @@
     <title>Vídeos - Márcio O Fiscal do Povo</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
-        body { background: #000; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-        .videos-section { background: #000; padding: 20px 20px 60px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .section-header { width: 100%; display: flex; justify-content: center; margin-bottom: 40px; }
-        .section-title-premium { font-size: 2.5rem; color: #4facfe; font-weight: 900; text-transform: uppercase; text-align: center; border-bottom: 3px solid #d4af37; padding-bottom: 10px; }
+        body { background: #000; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; color: #fff; }
+        .videos-section { padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .section-title-premium { font-size: 2.5rem; color: #4facfe; font-weight: 900; text-transform: uppercase; border-bottom: 3px solid #d4af37; margin-bottom: 40px; }
         .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; width: 100%; max-width: 1400px; }
         @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .videos-grid { grid-template-columns: 1fr; } .section-title-premium { font-size: 1.8rem; } }
+        @media (max-width: 768px) { .videos-grid { grid-template-columns: 1fr; } }
+        
         .video-item { width: 100%; }
         .video-header { margin-bottom: 10px; border-left: 4px solid #4facfe; padding-left: 12px; }
-        .video-title { color: #fff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
-        .video-container { width: 100%; height: 450px; border-radius: 12px; overflow: hidden; background: #1a1a1a; border: 2px solid #333; }
+        .video-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+        
+        /* Capa do Vídeo */
+        .video-box { 
+            width: 100%; height: 450px; border-radius: 12px; overflow: hidden; 
+            background: #1a1a1a; border: 2px solid #333; position: relative; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .video-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.3s; }
+        .video-box:hover img { opacity: 0.8; transform: scale(1.05); }
+        .video-box i { position: absolute; font-size: 60px; color: #4facfe; z-index: 2; text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+        
         iframe { width: 100%; height: 100%; border: none; }
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background: #25d366; color: #fff; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="nav-logo">MÁRCIO</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">INÍCIO</a></li>
-                <li><a href="videos.html">VÍDEOS</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <a href="https://wa.me/5594992500073" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
     <section class="videos-section">
-        <div class="section-header">
-            <h2 class="section-title-premium">FISCALIZAÇÃO EM AÇÃO</h2>
-        </div>
+        <h2 class="section-title-premium">FISCALIZAÇÃO EM AÇÃO</h2>
         <div class="videos-grid" id="main-grid"></div>
     </section>
 
     <script>
         const vids = [
-            { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/" },
-            { url: "https://www.facebook.com/reel/1311500697698154/" },
-            { url: "https://www.facebook.com/reel/1255227905934165/" },
-            { url: "https://www.facebook.com/reel/918105837590302/" },
-            { url: "https://www.facebook.com/reel/892065873601712/" },
-            { url: "https://www.facebook.com/reel/1368983204916952/" },
-            { url: "https://www.facebook.com/reel/4248589908737282/" },
-            { url: "https://www.facebook.com/reel/1237729917718655/" },
-            { url: "https://www.facebook.com/61584229254460/videos/2324834691275918/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1413429316856625/" },
-            { url: "https://www.facebook.com/reel/910739144763482/" },
-            { url: "https://www.facebook.com/reel/2028403714384406/" },
-            { url: "https://www.facebook.com/reel/3418190201677490/" },
-            { url: "https://www.facebook.com/reel/780820698408023/" },
-            { url: "https://www.facebook.com/reel/1563117801404973/" },
-            { url: "https://www.facebook.com/reel/1511323676623680/" },
-            { url: "https://www.facebook.com/reel/917312870982615/" },
-            { url: "https://www.facebook.com/reel/1393071085896662/" },
-            { url: "https://www.facebook.com/reel/4540325692864998/" },
-            { url: "https://www.facebook.com/reel/1577727400076062/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1332016238598731/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1448080936945494/" },
-            { url: "https://www.facebook.com/61584229254460/videos/732036759646273/" },
-            { url: "https://www.facebook.com/61584229254460/videos/866464966378470/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1402035328312076/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1779980722700407/" },
-            { url: "https://www.facebook.com/61584229254460/videos/762977366433002/" },
-            { url: "https://www.facebook.com/reel/1565699784740078/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1548629129677773/" },
-            { url: "https://www.facebook.com/reel/1250104950433433/" },
-            { url: "https://www.facebook.com/61584229254460/videos/841709148730352/" },
-            { url: "https://www.facebook.com/reel/1416748956475027/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1359076752097937/" },
-            { url: "https://www.facebook.com/reel/810689882004455/" },
-            { url: "https://www.facebook.com/reel/4310340892577147/" },
-            { url: "https://www.facebook.com/reel/1225675929446809/" },
-            { url: "https://www.facebook.com/reel/1605158243845556/" },
-            { url: "https://www.facebook.com/reel/1567627301118036/" },
-            { url: "https://www.facebook.com/reel/1594954414830260/" },
-            { url: "https://www.facebook.com/reel/728707913616149/" },
-            { url: "https://www.facebook.com/reel/1829973627626379/" },
-            { url: "https://www.facebook.com/reel/829946646492679/" },
-            { url: "https://www.facebook.com/reel/1295610985706285/" },
-            { url: "https://www.facebook.com/reel/1372975374610612/" },
-            { url: "https://www.facebook.com/reel/1581659126353356/" },
-            { url: "https://www.facebook.com/reel/1205707208106266/" },
-            { url: "https://www.facebook.com/reel/1228353052685377/" },
-            { url: "https://www.facebook.com/reel/709621431761999/" },
-            { url: "https://www.facebook.com/reel/1314545003805542/" },
-            { url: "https://www.facebook.com/reel/1366639795107440/" },
-            { url: "https://www.facebook.com/reel/1542270400026390/" },
-            { url: "https://www.facebook.com/reel/844283248087871/" },
-            { url: "https://www.facebook.com/reel/1830957114209938/" },
-            { url: "https://www.facebook.com/reel/809238495204125/" },
-            { url: "https://www.facebook.com/reel/1567188791362872/" },
-            { url: "https://www.facebook.com/reel/999747685688481/" },
-            { url: "https://www.facebook.com/reel/838948629033710/" },
-            { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/" }
+            { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/", thumb: "img/capa1.png" },
+            { url: "https://www.facebook.com/reel/1311500697698154/", thumb: "img/capa2.png" },
+            { url: "https://www.facebook.com/reel/1255227905934165/", thumb: "img/capa3.png" },
+            { url: "https://www.facebook.com/reel/918105837590302/", thumb: "img/capa4.png" },
+            { url: "https://www.facebook.com/reel/892065873601712/", thumb: "img/capa5.png" },
+            { url: "https://www.facebook.com/reel/1368983204916952/", thumb: "img/capa6.png" },
+            { url: "https://www.facebook.com/reel/4248589908737282/", thumb: "img/capa7.png" },
+            { url: "https://www.facebook.com/reel/1237729917718655/", thumb: "img/capa8.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/2324834691275918/", thumb: "img/capa9.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1413429316856625/", thumb: "img/capa10.png" },
+            { url: "https://www.facebook.com/reel/910739144763482/", thumb: "img/capa11.png" },
+            { url: "https://www.facebook.com/reel/2028403714384406/", thumb: "img/capa12.png" },
+            { url: "https://www.facebook.com/reel/3418190201677490/", thumb: "img/capa13.png" },
+            { url: "https://www.facebook.com/reel/780820698408023/", thumb: "img/capa14.png" },
+            { url: "https://www.facebook.com/reel/1563117801404973/", thumb: "img/capa15.png" },
+            { url: "https://www.facebook.com/reel/1511323676623680/", thumb: "img/capa16.png" },
+            { url: "https://www.facebook.com/reel/917312870982615/", thumb: "img/capa17.png" },
+            { url: "https://www.facebook.com/reel/1393071085896662/", thumb: "img/capa18.png" },
+            { url: "https://www.facebook.com/reel/4540325692864998/", thumb: "img/capa19.png" },
+            { url: "https://www.facebook.com/reel/1577727400076062/", thumb: "img/capa20.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1332016238598731/", thumb: "img/capa21.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1448080936945494/", thumb: "img/capa22.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/732036759646273/", thumb: "img/capa23.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/866464966378470/", thumb: "img/capa24.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1402035328312076/", thumb: "img/capa25.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1779980722700407/", thumb: "img/capa26.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/762977366433002/", thumb: "img/capa27.png" },
+            { url: "https://www.facebook.com/reel/1565699784740078/", thumb: "img/capa28.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1548629129677773/", thumb: "img/capa29.png" },
+            { url: "https://www.facebook.com/reel/1250104950433433/", thumb: "img/capa30.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/841709148730352/", thumb: "img/capa31.png" },
+            { url: "https://www.facebook.com/reel/1416748956475027/", thumb: "img/capa32.png" },
+            { url: "https://www.facebook.com/61584229254460/videos/1359076752097937/", thumb: "img/capa33.png" },
+            { url: "https://www.facebook.com/reel/810689882004455/", thumb: "img/capa34.png" },
+            { url: "https://www.facebook.com/reel/4310340892577147/", thumb: "img/capa35.png" },
+            { url: "https://www.facebook.com/reel/1225675929446809/", thumb: "img/capa36.png" },
+            { url: "https://www.facebook.com/reel/1605158243845556/", thumb: "img/capa37.png" },
+            { url: "https://www.facebook.com/reel/1567627301118036/", thumb: "img/capa38.png" },
+            { url: "https://www.facebook.com/reel/1594954414830260/", thumb: "img/capa39.png" },
+            { url: "https://www.facebook.com/reel/728707913616149/", thumb: "img/capa40.png" },
+            { url: "https://www.facebook.com/reel/1829973627626379/", thumb: "img/capa41.png" },
+            { url: "https://www.facebook.com/reel/829946646492679/", thumb: "img/capa42.png" },
+            { url: "https://www.facebook.com/reel/1295610985706285/", thumb: "img/capa43.png" },
+            { url: "https://www.facebook.com/reel/1372975374610612/", thumb: "img/capa44.png" },
+            { url: "https://www.facebook.com/reel/1581659126353356/", thumb: "img/capa45.png" },
+            { url: "https://www.facebook.com/reel/1205707208106266/", thumb: "img/capa46.png" },
+            { url: "https://www.facebook.com/reel/1228353052685377/", thumb: "img/capa47.png" },
+            { url: "https://www.facebook.com/reel/709621431761999/", thumb: "img/capa48.png" },
+            { url: "https://www.facebook.com/reel/1314545003805542/", thumb: "img/capa49.png" },
+            { url: "https://www.facebook.com/reel/1366639795107440/", thumb: "img/capa50.png" },
+            { url: "https://www.facebook.com/reel/1542270400026390/", thumb: "img/capa51.png" },
+            { url: "https://www.facebook.com/reel/844283248087871/", thumb: "img/capa52.png" },
+            { url: "https://www.facebook.com/reel/1830957114209938/", thumb: "img/capa53.png" },
+            { url: "https://www.facebook.com/reel/809238495204125/", thumb: "img/capa54.png" },
+            { url: "https://www.facebook.com/reel/1567188791362872/", thumb: "img/capa55.png" },
+            { url: "https://www.facebook.com/reel/999747685688481/", thumb: "img/capa56.png" },
+            { url: "https://www.facebook.com/reel/838948629033710/", thumb: "img/capa57.png" },
+            { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/", thumb: "img/capa58.png" }
         ];
 
         const grid = document.getElementById('main-grid');
@@ -114,26 +107,24 @@
         [...vids].reverse().forEach((vid, i) => {
             const num = total - i;
             const displayNum = num < 10 ? '0' + num : num;
-            
-            // Gerar URL do Plugin do Facebook
-            const finalUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(vid.url)}&show_text=false&t=0`;
-
             const item = document.createElement('div');
             item.className = 'video-item';
+            
             item.innerHTML = `
                 <div class="video-header"><span class="video-title">Ação #${displayNum}</span></div>
-                <div class="video-container">
-                    <iframe src="${finalUrl}" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                <div class="video-box" onclick="playVideo(this, '${vid.url}')">
+                    <img src="${vid.thumb}" alt="Capa" onerror="this.src='https://via.placeholder.com/450x800/1a1a1a/4facfe?text=MÁRCIO+FISCAL'">
+                    <i class="fas fa-play-circle"></i>
                 </div>
             `;
             grid.appendChild(item);
         });
-    </script>
 
-    <footer style="background: #001a33; padding: 60px 20px; border-top: 5px solid #d4af37; text-align: center; width: 100%; color: white;">
-        <h2 style="color: #d4af37; text-transform: uppercase;">Márcio O Fiscal do Povo</h2>
-        <p>© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
-    </footer>
+        function playVideo(container, url) {
+            const finalUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&autoplay=true`;
+            container.innerHTML = `<iframe src="${finalUrl}" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+        }
+    </script>
 
 </body>
 </html>
