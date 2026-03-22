@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Container para manter a proporção vertical (Shorts/Reels) */
         .video-wrapper {
             position: relative;
             padding-bottom: 177.77%; /* Proporção 9:16 */
@@ -17,56 +16,58 @@
         }
         .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             border: none;
         }
-        /* Ajuste para vídeos do Facebook que não são verticais */
         .fb-video-wrapper {
-            padding-bottom: 100%; /* Proporção 1:1 (quadrado) */
+            padding-bottom: 100%;
         }
-        /* Sombra para garantir a leitura do texto sobre o vídeo */
         .text-overlay {
             background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans relative">
+<body class="bg-gray-950 text-gray-100 font-sans flex flex-col min-h-screen">
 
-    <header class="bg-gray-900 shadow-lg p-4 mb-8 border-b-2 border-yellow-500 relative z-50">
+    <header class="bg-gray-900 shadow-lg p-4 border-b-2 border-yellow-500">
         <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
             <h1 class="text-xl font-black uppercase tracking-tighter text-white">
                 <i class="fas fa-eye mr-2 text-yellow-500"></i> Fiscal do Povo
             </h1>
-            <p class="text-gray-400 text-xs mt-1 sm:mt-0">Fiscalizando Conceição do Araguaia</p>
+            <nav class="flex space-x-4 mt-2 sm:mt-0 text-sm">
+                <a href="index.html" class="hover:text-yellow-500 transition">Início</a>
+                <a href="videos.html" class="text-yellow-500 font-bold">Vídeos</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-2 pb-16 relative z-10">
-        
+    <main class="container mx-auto px-2 py-8 flex-grow">
         <div class="mb-6 border-l-4 border-blue-600 pl-3">
-            <h2 class="text-2xl font-bold text-white">Galeria de Atuação</h2>
-            <p class="text-gray-400 text-sm">60 vídeos de fiscalização e denúncias.</p>
+            <h2 class="text-2xl font-bold text-white uppercase italic">Galeria de Atuação</h2>
         </div>
 
         <div id="video-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
             </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-500 py-6 mt-auto border-t border-gray-800 relative z-50">
-        <div class="container mx-auto text-center px-4 text-xs">
-            <p class="font-semibold text-gray-400">Márcio Rodrigues de Oliveira</p>
-            <p class="mt-1">Conteúdo focado em transparência e moralidade pública.</p>
+    <footer class="bg-blue-900 text-white py-10 mt-auto border-t-4 border-yellow-500">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-4 uppercase">Márcio Rodrigues de Oliveira</h2>
+            <p class="text-yellow-400 font-bold mb-6 tracking-widest uppercase">Fiscal do Povo</p>
+            <div class="flex justify-center space-x-6 mb-8 text-2xl">
+                <a href="https://www.facebook.com/MarcioFiscalDoPovo" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/marciofiscaldopovo" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@MarcioFiscaldoPovo" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-sm text-blue-200">© 2026 Márcio Fiscal do Povo - Todos os direitos reservados.</p>
+            <p class="text-[10px] mt-2 text-blue-300 uppercase">Conceição do Araguaia - Pará</p>
         </div>
     </footer>
 
     <script>
-        // Sua lista de 60 vídeos (mantive a mesma estrutura)
         const vids = [
-            { url: "https://www.youtube.com/shorts/eVw85yaH-UM", title: "Câmara Municipal" },
-            { url: "https://www.youtube.com/watch?v=ct3KEIpG-8c", title: "Denúncia Antiga" }, // Exemplo de título
+            { url: "https://www.youtube.com/shorts/eVw85yaH-UM", title: "Câmara Municipal 09/03" },
+            { url: "https://www.youtube.com/watch?v=ct3KEIpG-8c" },
             { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/" },
             { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/" },
             { url: "https://www.facebook.com/reel/1311500697698154/" },
@@ -131,43 +132,33 @@
 
         vids.forEach((video, index) => {
             const card = document.createElement('div');
-            // Classes do card: fundo escuro, borda fina, cantos menores (md), sombra leve, posição relativa
             card.className = "bg-gray-900 rounded-md overflow-hidden shadow border border-gray-800 hover:border-blue-900 transition-colors duration-300 flex flex-col relative";
             
             let embedUrl = "";
             const videoNumber = vids.length - index;
 
-            // Lógica de Embed (YouTube e Facebook)
             if (video.url.includes("youtube.com") || video.url.includes("youtu.be")) {
                 let id = "";
                 if(video.url.includes("shorts/")) id = video.url.split("shorts/")[1].split("?")[0];
                 else if(video.url.includes("v=")) id = video.url.split("v=")[1].split("&")[0];
-                embedUrl = `https://www.youtube.com/embed/${id}?controls=0&modestbranding=1&rel=0`; // Remove controles para ficar mais limpo
+                embedUrl = `https://www.youtube.com/embed/${id}?controls=0&modestbranding=1&rel=0`;
             } else if (video.url.includes("facebook.com")) {
                 embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url)}&show_text=0&controls=0`;
             }
 
-            // Define se o vídeo usa proporção de Reel (vertical) ou Vídeo Comum (quadrado/horizontal)
             const isFbVideo = video.url.includes('videos');
 
             card.innerHTML = `
                 <div class="video-wrapper ${isFbVideo ? 'fb-video-wrapper' : ''} flex-grow">
-                    <iframe 
-                        src="${embedUrl}" 
-                        allowfullscreen 
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                        loading="lazy"
-                        class="relative z-0">
-                    </iframe>
-                    
+                    <iframe src="${embedUrl}" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" loading="lazy" class="relative z-0"></iframe>
                     <div class="absolute top-0 left-0 w-full p-2.5 z-10 text-overlay rounded-t-md">
                         <p class="text-yellow-500 font-bold text-[10px] uppercase tracking-wider">Vídeo ${videoNumber}</p>
                         ${video.title ? `<h3 class="text-xs font-semibold text-white mt-0.5 line-clamp-1">${video.title}</h3>` : ''}
                     </div>
                 </div>
                 <div class="p-2 border-t border-gray-800 bg-gray-900 relative z-20">
-                    <a href="${video.url}" target="_blank" class="text-[11px] text-gray-400 hover:text-blue-400 transition block text-center">
-                        Origem <i class="fas fa-external-link-alt ml-1 text-[9px]"></i>
+                    <a href="${video.url}" target="_blank" class="text-[11px] text-gray-400 hover:text-blue-400 transition block text-center uppercase font-bold tracking-tighter">
+                        Ver Original <i class="fas fa-external-link-alt ml-1 text-[9px]"></i>
                     </a>
                 </div>
             `;
