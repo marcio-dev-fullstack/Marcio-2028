@@ -3,49 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vídeos - Márcio Fiscal do Povo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Vídeos - Márcio o Fiscal do Povo</title>
     <style>
-        /* RESET E MENU HORIZONTAL */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background-color: #002b5c; color: white; }
-    
-        nav {
-            background-color: #001f3f; 
-            padding: 20px 0;
-            width: 100%;
-            border-bottom: 2px solid #b8860b;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-    
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-    
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-    
+
+        /* MENU */
+        nav { background-color: #001f3f; padding: 20px 0; border-bottom: 2px solid #b8860b; position: sticky; top: 0; z-index: 1000; }
+        nav ul { list-style: none; display: flex; justify-content: center; gap: 25px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; }
         nav ul li a:hover { color: #ffcc00; }
-    
-        /* Ajuste para Celular */
-        @media (max-width: 600px) {
-            nav ul { flex-direction: column; align-items: center; gap: 15px; }
+
+        h1 { text-align: center; margin: 40px 0; }
+
+        /* CONTAINER PARA 4 POR LINHA NO PC */
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* FORÇA 4 COLUNAS NO PC */
+            gap: 20px;
+            padding: 20px;
+            max-width: 1600px; /* Aumentado para caber janelas maiores */
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Altura para Shorts/Reels (Vertical) ou Vídeos Normais */
+        .video-card iframe {
+            width: 100%;
+            height: 500px; /* Altura maior para destacar bem os Reels/Shorts */
+            display: block;
+            border: none;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 1200px) {
+            .videos-container { grid-template-columns: repeat(2, 1fr); } /* 2 por linha em tablets */
+        }
+
+        @media (max-width: 768px) {
+            nav ul { flex-direction: column; align-items: center; gap: 10px; }
+            .videos-container { grid-template-columns: 1fr; } /* 1 por linha no celular */
+            .video-card iframe { height: 450px; }
         }
     </style>
 </head>
-
 <body>
+
     <nav>
         <ul>
             <li><a href="index.html#inicio">INÍCIO</a></li>
@@ -57,35 +66,16 @@
         </ul>
     </nav>
 
-    </header>
+    <h1>Galeria de Vídeos</h1>
 
-    <main class="container mx-auto px-2 py-10 flex-grow">
-        <div class="mb-8 border-l-8 border-custom-blue pl-4">
-            <h2 class="text-3xl font-black text-custom-blue uppercase italic tracking-tighter">Vídeos de Fiscalização</h2>
+    <div class="videos-container" id="videoGrid">
         </div>
-
-        <div id="video-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-            </div>
-    </main>
-
-    <footer class="main-footer" style="background: #001a33; padding: 60px 20px; border-top: 5px solid #d4af37; text-align: center;">
-        <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: #d4af37; font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase;">Márcio O Fiscal do Povo</h2>
-            <p style="color: white; margin-bottom: 30px;">© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
-            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
-                <a href="https://wa.me/5594992500073" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.facebook.com/MarcioFiscalDoPovo" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/marcioofiscaldopovo/" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@MarcioFiscalDoPovo" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-    </footer>
 
     <script>
         const vids = [
-            { url: "https://www.facebook.com/reel/1297900528910905", title: "RUTHELLY 25/03" },
-            { url: "https://www.youtube.com/shorts/vn-rc9SJtJE", title: "Bombeiros 25/03" },
-            { url: "https://www.youtube.com/shorts/eVw85yaH-UM", title: "Câmara Municipal 09/03" },
+            { url: "https://www.facebook.com/reel/1297900528910905" },
+            { url: "https://www.youtube.com/shorts/vn-rc9SJtJE" },
+            { url: "https://www.youtube.com/shorts/eVw85yaH-UM" },
             { url: "https://www.youtube.com/watch?v=ct3KEIpG-8c" },
             { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/" },
             { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/" },
@@ -147,39 +137,14 @@
             { url: "https://www.facebook.com/reel/838948629033710/" }
         ];
 
-        const grid = document.getElementById('video-grid');
-
-        vids.forEach((video, index) => {
+        // Lógica para carregar os vídeos na tela
+        const container = document.getElementById('videoGrid');
+        
+        vids.forEach(vid => {
             const card = document.createElement('div');
-            card.className = "bg-white rounded-md overflow-hidden shadow-lg border border-gray-200 flex flex-col relative";
-            
-            let embedUrl = "";
-            const videoNumber = vids.length - index;
-
-            if (video.url.includes("youtube.com") || video.url.includes("youtu.be")) {
-                let id = "";
-                if(video.url.includes("shorts/")) id = video.url.split("shorts/")[1].split("?")[0];
-                else if(video.url.includes("v=")) id = video.url.split("v=")[1].split("&")[0];
-                embedUrl = `https://www.youtube.com/embed/${id}?controls=0&modestbranding=1&rel=0`;
-            } else if (video.url.includes("facebook.com")) {
-                embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url)}&show_text=0&controls=0`;
-            }
-
-            const isFbVideo = video.url.includes('videos');
-
-            card.innerHTML = `
-                <div class="video-wrapper ${isFbVideo ? 'fb-video-wrapper' : ''} flex-grow">
-                    <iframe src="${embedUrl}" allowfullscreen loading="lazy"></iframe>
-                    <div class="absolute top-0 left-0 w-full p-2 z-10 text-overlay rounded-t-md">
-                        <p class="text-custom-gold font-bold text-[9px] uppercase tracking-widest">Vídeo ${videoNumber}</p>
-                        ${video.title ? `<h3 class="text-[10px] font-bold text-white mt-0.5 line-clamp-1 uppercase">${video.title}</h3>` : ''}
-                    </div>
-                </div>
-                <div class="p-1.5 bg-white relative z-20">
-                    <a href="${video.url}" target="_blank" class="text-[9px] text-custom-blue block text-center uppercase font-black tracking-tighter hover:text-custom-gold transition">Link Original</a>
-                </div>
-            `;
-            grid.appendChild(card);
+            card.className = 'video-card';
+            card.innerHTML = `<iframe src="${vid.url}" allowfullscreen></iframe>`;
+            container.appendChild(card);
         });
     </script>
 </body>
