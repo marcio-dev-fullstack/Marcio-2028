@@ -7,48 +7,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --azul-marinho: #001220;
-            --dourado: #f1c40f;
+        /* RESET E MENU HORIZONTAL */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #002b5c; color: white; }
+    
+        nav {
+            background-color: #001f3f; 
+            padding: 20px 0;
+            width: 100%;
+            border-bottom: 2px solid #b8860b;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .bg-custom-blue { background-color: var(--azul-marinho); }
-        .text-custom-gold { color: var(--dourado); }
-        .border-custom-gold { border-color: var(--dourado); }
-
-        .video-wrapper { 
-            position: relative; 
-            padding-bottom: 177.77%; 
-            height: 0; 
-            overflow: hidden; 
-            background: #000; 
+    
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
-        .video-wrapper iframe { 
-            position: absolute; 
-            top: 0; left: 0; width: 100%; height: 100%; 
-            border: none; 
+    
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
         }
-        .fb-video-wrapper { padding-bottom: 100%; }
-        .text-overlay { 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); 
+    
+        nav ul li a:hover { color: #ffcc00; }
+    
+        /* Ajuste para Celular */
+        @media (max-width: 600px) {
+            nav ul { flex-direction: column; align-items: center; gap: 15px; }
         }
-        /* Ajuste para o conteúdo não ficar escondido sob o menu fixo */
-        body { padding-top: 120px; } 
     </style>
 </head>
-<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
 
-    <header class="bg-custom-blue py-6 shadow-xl fixed top-0 left-0 w-full z-[100] border-b-4 border-yellow-500">
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html#inicio">INÍCIO</a></li>
+            <li><a href="index.html#marcio">MÁRCIO</a></li>
+            <li><a href="index.html#aline">ALINE</a></li>
+            <li><a href="index.html#propostas">PROPOSTAS</a></li>
+            <li><a href="videos.html">VÍDEOS</a></li>
+            <li><a href="fotos.html">FOTOS</a></li>
+        </ul>
+    </nav>
 
-        <nav>
-            <ul>
-                <li><a href="index.html#inicio">INÍCIO</a></li>
-                <li><a href="index.html#marcio">MÁRCIO</a></li>
-                <li><a href="index.html#aline">ALINE</a></li>
-                <li><a href="index.html#propostas">PROPOSTAS</a></li>
-                <li><a href="videos.html">VÍDEOS</a></li>
-                <li><a href="fotos.html">FOTOS</a></li>
-            </ul>
-        </nav>
+    <h1 style="text-align:center; margin-top:40px;">Nossos Vídeos</h1>
 
     </header>
 
