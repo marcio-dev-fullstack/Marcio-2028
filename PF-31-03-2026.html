@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operação Bico Duplo - Guia de Fiscalização</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #d69e2e;
+            --danger: #c53030;
+            --success: #276749;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border-left: 5px solid var(--danger);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-left: 5px solid var(--secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-left: 5px solid var(--success);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, var(--light) 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .checklist {
+            background: var(--dark);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .checklist h2 {
+            color: white;
+            border-bottom-color: var(--accent);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px 5px 5px 0;
+        }
+
+        .tag.danger {
+            background: var(--danger);
+        }
+
+        .tag.warning {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Operação Bico Duplo</h1>
+            <p class="subtitle">Guia Completo de Fiscalização e Combate à Corrupção em Licitações</p>
+            <span class="badge">📅 31/03/2026 - Conceição do Araguaia</span>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Mandados de Busca</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">R$27M</div>
+                <div class="stat-label">Bens Bloqueados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Cidades Envolvidas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">PF+CGU</div>
+                <div class="stat-label">Órgãos Atuantes</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🎯</span> Motivo da Operação</h2>
+            <div class="highlight-box">
+                <strong>Corrupção em Licitações Públicas</strong> - Frustração do caráter competitivo do certame
+            </div>
+            <p>A investigação foi aberta após indícios fortes de fraude em processos de licitação da prefeitura, incluindo:</p>
+            <ul>
+                <li><strong>Direcionamento de licitações</strong> - Editais feitos para favorecer empresas específicas</li>
+                <li><strong>Quebra da concorrência</strong> - Impedimento de competição real entre empresas</li>
+                <li><strong>Corrupção passiva</strong> - Servidores possivelmente recebendo vantagens indevidas</li>
+                <li><strong>Irregularidades em contratos públicos</strong> - Falhas estruturais nos editais</li>
+            </ul>
+            <p>Segundo a CGU, foram identificadas <strong>falhas estruturais nos editais</strong>, indicando possível manipulação dos processos.</p>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">👥</span> Envolvidos Identificados</h2>
+            <div class="info-box">
+                A PF não divulgou todos os nomes (fase inicial da investigação), mas já se sabe que há:
+            </div>
+            <ul>
+                <li><span class="tag danger">Servidores Públicos Municipais</span> - Inclusive com afastamento de um deles</li>
+                <li><span class="tag">Empresários/Empresas Contratadas</span> - Suspeitas de participação no esquema</li>
+                <li><span class="tag warning">Grupo Organizado</span> - Atuando dentro e fora da prefeitura</li>
+            </ul>
+            <p><strong>📍 Localizações:</strong> Conceição do Araguaia e Aparecida de Goiânia - indicando que o esquema <strong>não era só local</strong>.</p>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">⚖️</span> Medidas Judiciais Aplicadas</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>12 Mandados de Busca e Apreensão</strong><br>
+                    <small>Autorizados pela Justiça Federal</small>
+                </div>
+                <div class="timeline-item">
+                    <strong>Quebra de Sigilo Bancário e Telemático</strong><br>
+                    <small>Acesso a movimentações financeiras e comunicações</small>
+                </div>
+                <div class="timeline-item">
+                    <strong>Bloqueio de Bens e Contas</strong><br>
+                    <small>Até cerca de R$ 27 milhões</small>
+                </div>
+                <div class="timeline-item">
+                    <strong>Afastamento de Servidor Público</strong><br>
+                    <small>Remoção temporária do cargo</small>
+                </div>
+            </div>
+            <div class="success-box">
+                <strong>💡 Objetivo:</strong> Garantir devolução do dinheiro público e enfraquecer financeiramente o grupo investigado.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">⚙️</span> Como Funciona o Esquema (Passo a Passo)</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>🎯 Escolha do Contrato</h3>
+                    <p>Contratos públicos relevantes (obras, serviços, fornecimento) com <strong>valores altos</strong> que permitem margem para desvio.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>📄 Edital Direcionado</h3>
+                    <p>Exigências técnicas desnecessárias, critérios "sob medida", prazos curtos. A licitação <strong>parece legal</strong>, mas já tem vencedor definido.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>🧑‍🤝‍🧑 Empresas de Fachada</h3>
+                    <p>Acordos entre empresas para "fingir concorrência". Algumas entram só para apresentar propostas mais caras propositalmente = <strong>cartel</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>💰 Superfaturamento</h3>
+                    <p>Contrato executado com preço <strong>acima do mercado</strong>, qualidade inferior, ou parcialmente executado. A diferença vira lucro ilícito.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>🔁 Retorno do Dinheiro</h3>
+                    <p>Parte do valor volta para servidores, gestores e intermediários via transferências indiretas, empresas "laranjas" ou pagamentos em dinheiro = <strong>propina</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3>🧾 "Legalização"</h3>
+                    <p>Notas fiscais emitidas normalmente, processos formalmente corretos, pareceres técnicos "montados" = <strong>blindagem documental</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🚨</span> Por Que é Difícil Detectar?</h2>
+            <div class="warning-box">
+                <strong>Não é um roubo "explícito".</strong> Tudo acontece dentro de processos oficiais, com documentos aparentemente válidos e aparência de legalidade.
+            </div>
+            <p>Por isso entram órgãos especializados:</p>
+            <ul>
+                <li>🚔 <strong>Polícia Federal</strong> - Investigação criminal</li>
+                <li>📊 <strong>Controladoria-Geral da União (CGU)</strong> - Auditorias e fiscalização</li>
+                <li>⚖️ <strong>Ministério Público</strong> - Ação judicial</li>
+                <li>📋 <strong>Tribunal de Contas</strong> - Controle externo</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🔍</span> O Que Denuncia o Esquema</h2>
+            <p>Investigações como essa costumam começar por:</p>
+            <ul>
+                <li>📊 <strong>Auditorias da CGU</strong> - Análise sistemática de contratos</li>
+                <li>📢 <strong>Denúncias Internas</strong> - Whistleblowers (denunciantes internos)</li>
+                <li>💳 <strong>Movimentações Bancárias Suspeitas</strong> - Transações atípicas</li>
+                <li>🏆 <strong>Empresas Repetindo Vitórias</strong> - Padrões estatísticos anômalos</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">📋</span> Guia Prático para Vereadores - Como Identificar Fraude</h2>
+
+            <h3>1. 🧭 Comece pelo Edital</h3>
+            <div class="info-box">
+                <strong>O que analisar:</strong> Exigências técnicas excessivas, marcas/modelos "disfarçados", qualificações desnecessárias.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Só 1 ou 2 empresas participam, requisitos "sob medida".<br><br>
+                <em>💡 Regra: Quanto mais restritivo o edital, maior a chance de direcionamento.</em>
+            </div>
+
+            <h3>2. 📊 Compare com o Mercado</h3>
+            <div class="info-box">
+                <strong>Faça isso:</strong> Pegue o valor contratado e compare com outras prefeituras, painéis públicos (Banco de Preços), contratos similares.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Preço muito acima do padrão, diferença injustificada = superfaturamento.
+            </div>
+
+            <h3>3. 🧾 Analise Quem Sempre Ganha</h3>
+            <div class="info-box">
+                <strong>Verifique:</strong> Empresas vencedoras nos últimos contratos, frequência de vitórias.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Mesmas empresas ganhando sempre, empresas "revezando vitória" = cartel.<br><br>
+                <em>💡 Técnica: Monte uma planilha com CNPJ vs contratos.</em>
+            </div>
+
+            <h3>4. 🏢 Investigue as Empresas</h3>
+            <div class="info-box">
+                <strong>Consulte:</strong> CNPJ (Receita Federal), endereço, sócios.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Mesmo endereço, mesmos sócios, pouco tempo de criação, sem estrutura real = empresa de fachada.
+            </div>
+
+            <h3>5. 📑 Veja a Execução do Contrato</h3>
+            <div class="highlight-box">
+                <strong>Vá a campo:</strong> A obra existe? O serviço está sendo feito? A qualidade condiz com o valor?<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Obra parada, material inferior, serviço pago mas não executado.<br><br>
+                <em>💡 Aqui está o ouro: Muitas fraudes só aparecem na execução.</em>
+            </div>
+
+            <h3>6. 💰 Fique Atento a Aditivos</h3>
+            <div class="info-box">
+                <strong>Analise:</strong> Aditivos de valor e prazo.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Aumento frequente de valor, justificativas genéricas.<br><br>
+                <em>👉 Clássico: Ganha barato → aumenta depois.</em>
+            </div>
+
+            <h3>7. 🧠 Leia os Pareceres Técnicos</h3>
+            <div class="info-box">
+                <strong>Verifique:</strong> Justificativas do processo, parecer jurídico e técnico.<br><br>
+                <strong>🚨 Sinais de alerta:</strong> Textos genéricos, falta de fundamentação, cópias de outros processos.
+            </div>
+
+            <h3>8. 📡 Use Ferramentas Existentes</h3>
+            <div class="success-box">
+                <strong>Você não precisa começar do zero:</strong>
+                <ul>
+                    <li>Portal da Transparência municipal</li>
+                    <li>Tribunal de Contas da União</li>
+                    <li>Controladoria-Geral da União</li>
+                    <li>Portais de compras públicas</li>
+                </ul>
+            </div>
+
+            <h3>9. ⚖️ O Que Fazer Quando Encontrar Indícios</h3>
+            <div class="warning-box">
+                <strong>📌 Caminho correto:</strong> Protocolar denúncia no Ministério Público, Tribunal de Contas ou Polícia Federal (casos mais graves).<br><br>
+                <strong>📌 Como fortalecer a denúncia:</strong> Anexar documentos, mostrar comparações, demonstrar padrão (não só um caso isolado).
+            </div>
+        </div>
+
+        <div class="checklist">
+            <h2><span class="icon">✅</span> Checklist Rápido - Modo Fiscalização</h2>
+            <p style="margin-bottom: 20px; opacity: 0.9;">Se bater 3 ou mais itens abaixo, <span class="pulse">acende alerta</span>:</p>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="check1">
+                <label for="check1">Edital restritivo ou com exigências técnicas desnecessárias</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check2">
+                <label for="check2">Poucas empresas participantes (1-2 empresas)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check3">
+                <label for="check3">Mesma empresa sempre vence as licitações</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check4">
+                <label for="check4">Preço acima do mercado ou de referências</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check5">
+                <label for="check5">Aditivos contratuais frequentes</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check6">
+                <label for="check6">Execução ruim ou incompleta do contrato</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check7">
+                <label for="check7">Empresas com mesmo endereço ou sócios</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check8">
+                <label for="check8">Pareceres técnicos genéricos ou copiados</label>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: rgba(214, 158, 46, 0.2); border-radius: 10px; text-align: center;">
+                <strong>👉 3+ itens marcados = Forte risco de fraude detectado</strong><br>
+                <small>Documente e acione os órgãos competentes imediatamente</small>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">⚖️</span> Crimes Envolvidos (Tipificação)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div style="background: #fed7d7; padding: 15px; border-radius: 10px; border-left: 4px solid #c53030;">
+                    <strong>Corrupção Passiva e Ativa</strong><br>
+                    <small>Art. 317 e 333 do CP</small>
+                </div>
+                <div style="background: #fefcbf; padding: 15px; border-radius: 10px; border-left: 4px solid #d69e2e;">
+                    <strong>Fraude em Licitação</strong><br>
+                    <small>Art. 333 do CP (Lei de Licitações)</small>
+                </div>
+                <div style="background: #c6f6d5; padding: 15px; border-radius: 10px; border-left: 4px solid #276749;">
+                    <strong>Associação Criminosa</strong><br>
+                    <small>Art. 288 do CP</small>
+                </div>
+                <div style="background: #e9d8fd; padding: 15px; border-radius: 10px; border-left: 4px solid #805ad5;">
+                    <strong>Lavagem de Dinheiro</strong><br>
+                    <small>Lei 9.613/98</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🎯</span> Conclusão</h2>
+            <div class="success-box">
+                <strong>Um vereador eficiente não precisa "provar o crime" sozinho.</strong><br><br>
+                Ele precisa:
+                <ul style="margin-top: 10px;">
+                    <li>👉 Identificar padrões</li>
+                    <li>👉 Levantar indícios técnicos</li>
+                    <li>👉 Acionar os órgãos certos</li>
+                </ul>
+            </div>
+            <p style="margin-top: 20px; font-size: 1.1rem; text-align: center;">
+                <strong>Este tipo de esquema não é improvisado — ele é planejado, estruturado e depende de conluio entre setor público e privado.</strong>
+            </p>
+        </div>
+
+        <footer>
+            <p>📚 Documento baseado na Operação Bico Duplo (PF/CGU) - 31/03/2026</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Guia educativo para fins de fiscalização e transparência pública</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animação suave ao rolar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Contador de checklist
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const alertBox = document.querySelector('.checklist > div:last-child');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checked = document.querySelectorAll('.checklist-item input:checked').length;
+                if (checked >= 3) {
+                    alertBox.style.background = 'rgba(197, 48, 48, 0.3)';
+                    alertBox.innerHTML = '<strong>🚨 ALERTA MÁXIMO: ' + checked + ' itens marcados = Forte risco de fraude!</strong><br><small>Documente tudo e acione o Ministério Público imediatamente</small>';
+                } else {
+                    alertBox.style.background = 'rgba(214, 158, 46, 0.2)';
+                    alertBox.innerHTML = '<strong>👉 ' + checked + ' itens marcados</strong><br><small>Continue monitorando - se chegar a 3, é hora de agir</small>';
+                }
+            });
+        });
+
+        // Efeito de entrada nos cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
