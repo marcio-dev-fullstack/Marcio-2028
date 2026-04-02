@@ -4,31 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vídeos - Márcio Fiscal do Povo</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FFD700; /* Amarelo Ouro */
+            --bg-dark: #0f111a;
+            --card-bg: #1a1d29;
+            --text-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav a.active { color: var(--primary); }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Grid Moderno */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: var(--primary);
+        }
+
+        .video-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .btn-assistir {
+            background-color: var(--primary);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+            transition: opacity 0.3s;
+        }
+
+        .btn-assistir:hover { opacity: 0.8; }
+
+        footer {
+            background: #000;
+            color: #888;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
 <body>
 
     <header>
         <nav>
-            <ul>
-                <li><a href="index.html">INÍCIO</a></li>
-            </ul>
+            <a href="index.html">INÍCIO</a>
         </nav>
     </header>
 
-    <main>
+    <div class="container">
+        <h1>Galeria de Vídeos</h1>
         <div id="video-container" class="video-grid">
             </div>
-    </main>
+    </div>
 
-    <footer style="text-align: center; padding: 20px;">
+    <footer>
         <p>&copy; 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
-        <div class="social-icons">
-            </div>
     </footer>
 
     <script>
         const vids = [
+            { url: "https://www.facebook.com/reel/2079469212999071" }, // Novo Vídeo no Topo
             { url: "https://www.facebook.com/reel/1297900528910905" },
             { url: "https://www.youtube.com/shorts/vn-rc9SJtJE" },
             { url: "https://www.youtube.com/shorts/eVw85yaH-UM" },
@@ -90,18 +193,25 @@
             { url: "https://www.facebook.com/reel/809238495204125/" },
             { url: "https://www.facebook.com/reel/1567188791362872/" },
             { url: "https://www.facebook.com/reel/999747685688481/" },
-            { url: "https://www.facebook.com/reel/838948629033710/" },
-            { url: "https://www.facebook.com/reel/2079469212999071" } // Posição 63 adicionada
+            { url: "https://www.facebook.com/reel/838948629033710/" }
         ];
 
-        // Função simples para carregar os vídeos (ajuste conforme seu script original)
         const container = document.getElementById('video-container');
-        vids.forEach(vid => {
-            const div = document.createElement('div');
-            div.className = 'video-item';
-            // Lógica para embutir o iframe ou link aqui
-            div.innerHTML = `<a href="${vid.url}" target="_blank">Assistir Vídeo</a>`;
-            container.appendChild(div);
+        
+        vids.forEach((vid, index) => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            
+            // Detecta se é Youtube ou Facebook para mudar o ícone
+            const icon = vid.url.includes('youtube') ? 'fa-brands fa-youtube' : 'fa-brands fa-facebook-f';
+            const label = `Vídeo ${vids.length - index}`;
+
+            card.innerHTML = `
+                <div class="video-icon"><i class="${icon}"></i></div>
+                <div style="font-weight: bold; margin-bottom: 10px;">${label}</div>
+                <a href="${vid.url}" target="_blank" class="btn-assistir">ASSISTIR AGORA</a>
+            `;
+            container.appendChild(card);
         });
     </script>
 </body>
