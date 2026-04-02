@@ -7,21 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #FFD700; /* Amarelo Ouro */
+            --primary: #FFD700;
             --bg-dark: #0f111a;
             --card-bg: #1a1d29;
             --text-light: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         header {
@@ -29,6 +27,9 @@
             padding: 20px 0;
             border-bottom: 2px solid var(--primary);
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav a {
@@ -42,10 +43,9 @@
         nav a.active { color: var(--primary); }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 40px auto;
             padding: 0 20px;
-            flex-grow: 1;
         }
 
         h1 {
@@ -56,58 +56,82 @@
             letter-spacing: 2px;
         }
 
-        /* Grid Moderno */
+        /* Grid Responsivo: 4 colunas no PC, 1 no Mobile */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(4, 1fr); /* 4 colunas no PC */
+            gap: 20px;
+        }
+
+        /* Ajuste para Tablet (2 colunas) */
+        @media (max-width: 1024px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Ajuste para Mobile (1 coluna) */
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: 1fr; }
         }
 
         .video-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            padding: 20px;
             border: 1px solid #333;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
+            transition: all 0.3s ease;
         }
 
         .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
-        .video-icon {
-            font-size: 50px;
-            color: var(--primary);
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 15px;
+        }
+
+        .video-icon { font-size: 24px; color: var(--primary); }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .video-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.4;
+            min-height: 40px;
         }
 
         .btn-assistir {
             background-color: var(--primary);
             color: #000;
-            padding: 10px 20px;
-            border-radius: 25px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 10px;
-            display: inline-block;
-            transition: opacity 0.3s;
+            font-size: 13px;
+            transition: background 0.3s;
+            margin-top: auto;
         }
 
-        .btn-assistir:hover { opacity: 0.8; }
+        .btn-assistir:hover { background-color: #e6c200; }
 
         footer {
-            background: #000;
-            color: #888;
             text-align: center;
-            padding: 30px;
-            border-top: 1px solid #222;
+            padding: 40px;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -116,28 +140,31 @@
     <header>
         <nav>
             <a href="index.html">INÍCIO</a>
+            <a href="videos.html" class="active">VÍDEOS</a>
         </nav>
     </header>
 
     <div class="container">
-        <h1>Galeria de Vídeos</h1>
+        <h1>Fiscalização e Ação</h1>
         <div id="video-container" class="video-grid">
             </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
+        <p>&copy; 2026 Márcio Rodrigues de Oliveira. Todos os direitos reservados.<br>Conceição do Araguaia - PA</p>
     </footer>
 
     <script>
+        // Adicionei o campo 'desc' para você colocar a descrição de cada vídeo
         const vids = [
-            { url: "https://www.facebook.com/reel/2079469212999071" }, // Novo Vídeo no Topo
-            { url: "https://www.facebook.com/reel/1297900528910905" },
-            { url: "https://www.youtube.com/shorts/vn-rc9SJtJE" },
-            { url: "https://www.youtube.com/shorts/eVw85yaH-UM" },
-            { url: "https://www.youtube.com/watch?v=ct3KEIpG-8c" },
-            { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/" },
-            { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/" },
+            { url: "https://www.facebook.com/reel/2079469212999071", desc: "Fiscalização recente sobre as obras municipais em Conceição do Araguaia." },
+            { url: "https://www.facebook.com/reel/1297900528910905", desc: "Acompanhamento de denúncia recebida pela comunidade local." },
+            { url: "https://www.youtube.com/shorts/vn-rc9SJtJE", desc: "Resumo da semana: Ações do Fiscal do Povo." },
+            { url: "https://www.youtube.com/shorts/eVw85yaH-UM", desc: "Transparência pública: Onde está sendo aplicado o recurso?" },
+            { url: "https://www.youtube.com/watch?v=ct3KEIpG-8c", desc: "Análise técnica de engenharia em obras de infraestrutura." },
+            { url: "https://www.facebook.com/MarcioFiscalDoPovo/videos/26456801260642575/", desc: "Live completa discutindo a gestão pública municipal." },
+            { url: "https://www.facebook.com/61584229254460/videos/1790105011949511/", desc: "Fiscalização em tempo real na Secretaria de Educação." },
+            // ... Para os demais vídeos, ele usará a descrição padrão abaixo se você não preencher
             { url: "https://www.facebook.com/reel/1311500697698154/" },
             { url: "https://www.facebook.com/reel/1255227905934165/" },
             { url: "https://www.facebook.com/reel/918105837590302/" },
@@ -202,14 +229,18 @@
             const card = document.createElement('div');
             card.className = 'video-card';
             
-            // Detecta se é Youtube ou Facebook para mudar o ícone
-            const icon = vid.url.includes('youtube') ? 'fa-brands fa-youtube' : 'fa-brands fa-facebook-f';
-            const label = `Vídeo ${vids.length - index}`;
+            const isYoutube = vid.url.includes('youtube');
+            const iconClass = isYoutube ? 'fa-brands fa-youtube' : 'fa-brands fa-facebook';
+            const numVideo = vids.length - index;
+            const descricao = vid.desc || "Acompanhe mais uma ação de fiscalização em prol da transparência pública.";
 
             card.innerHTML = `
-                <div class="video-icon"><i class="${icon}"></i></div>
-                <div style="font-weight: bold; margin-bottom: 10px;">${label}</div>
-                <a href="${vid.url}" target="_blank" class="btn-assistir">ASSISTIR AGORA</a>
+                <div class="video-header">
+                    <span class="video-title">VÍDEO #${numVideo}</span>
+                    <i class="${iconClass} video-icon"></i>
+                </div>
+                <div class="video-desc">${descricao}</div>
+                <a href="${vid.url}" target="_blank" class="btn-assistir">ABRIR VÍDEO</a>
             `;
             container.appendChild(card);
         });
