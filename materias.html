@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matérias | Reportagens</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- MENU ESTILIZADO --- */
+        .main-nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .nav-menu li a:hover {
+            background: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- GRID DE MATÉRIAS --- */
+        .content-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Cores temporárias para identificar os cards */
+        .img-cpi { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .img-pad { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .img-pf { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .img-sus { background: linear-gradient(135deg, #3498db, #2980b9); }
+
+        .card-image i {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                text-align: center;
+                padding: 20px 0;
+            }
+            .nav-menu.active { display: flex; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">MENU</div>
+            <button class="mobile-menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">INÍCIO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="content-section">
+        <h1 class="section-title">Matérias e Reportagens</h1>
+
+        <div class="articles-grid">
+            
+            <a href="cpi.html" class="article-card">
+                <div class="card-image img-cpi">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Investigação</span>
+                    <h2 class="card-title">Comissão Parlamentar de Inquérito: Acompanhe os desdobramentos</h2>
+                    <p>Análise detalhada sobre as recentes investigações e impactos na administração pública.</p>
+                </div>
+                <div class="card-footer">
+                    <span><i class="far fa-calendar-alt"></i> 2026</span>
+                    <span class="read-more">LER MATÉRIA →</span>
+                </div>
+            </a>
+
+            <a href="sus.html" class="article-card">
+                <div class="card-image img-sus">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Saúde Pública</span>
+                    <h2 class="card-title">O Impacto do SUS na Gestão Municipal</h2>
+                    <p>Como o Sistema Único de Saúde tem estruturado o atendimento local e novos projetos.</p>
+                </div>
+                <div class="card-footer">
+                    <span><i class="far fa-calendar-alt"></i> 2026</span>
+                    <span class="read-more">LER MATÉRIA →</span>
+                </div>
+            </a>
+
+            <a href="pf-31-03-2026.html" class="article-card">
+                <div class="card-image img-pf">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Segurança</span>
+                    <h2 class="card-title">Operação Polícia Federal: Atualização de Março/2026</h2>
+                    <p>Informações exclusivas sobre a movimentação realizada em 31 de março.</p>
+                </div>
+                <div class="card-footer">
+                    <span><i class="far fa-calendar-alt"></i> 2026</span>
+                    <span class="read-more">LER MATÉRIA →</span>
+                </div>
+            </a>
+
+            <a href="pad-2022.html" class="article-card">
+                <div class="card-image img-pad">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Administrativo</span>
+                    <h2 class="card-title">Processo Administrativo Disciplinar (PAD 2022)</h2>
+                    <p>Revisão histórica e técnica dos processos instaurados e suas conclusões jurídicas.</p>
+                </div>
+                <div class="card-footer">
+                    <span><i class="far fa-calendar-alt"></i> 2022</span>
+                    <span class="read-more">LER MATÉRIA →</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <script>
+        // Script para abrir/fechar menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
