@@ -3,305 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matérias | Reportagens</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <title>Matérias - Márcio Rodrigues</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --card-bg: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* --- MENU ESTILIZADO --- */
-        .main-nav {
-            background: var(--primary-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-menu li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            padding: 10px 20px;
-            transition: 0.3s;
-            border-radius: 5px;
-        }
-
-        .nav-menu li a:hover {
-            background: var(--accent-color);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* --- GRID DE MATÉRIAS --- */
-        .content-section {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .article-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .article-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Cores temporárias para identificar os cards */
-        .img-cpi { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .img-pad { background: linear-gradient(135deg, #f1c40f, #f39c12); }
-        .img-pf { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-        .img-sus { background: linear-gradient(135deg, #3498db, #2980b9); }
-
-        .card-image i {
-            font-size: 3rem;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .card-content {
+        .materias-container {
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 20px;
-            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-
-        .card-category {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
+        .card-materia {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
-
-        .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
+        .card-materia:hover {
+            border-color: #007bff;
         }
-
-        .card-footer {
-            padding: 15px 20px;
-            border-top: 1px solid #eee;
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .card-materia a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
         }
-
-        .read-more {
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 768px) {
-            .mobile-menu-btn { display: block; }
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--primary-color);
-                text-align: center;
-                padding: 20px 0;
-            }
-            .nav-menu.active { display: flex; }
-            .section-title { font-size: 1.8rem; }
+        .card-materia p {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="nav-logo">MENU</div>
-            <button class="mobile-menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html">INÍCIO</a></li>
-            </ul>
+    <header style="text-align: center; padding: 40px 0;">
+        <h1>Galeria de Matérias e Documentos</h1>
+        <p>Acompanhamento de Projetos e Fiscalização</p>
+    </header>
+
+    <div class="materias-container">
+        <div class="card-materia">
+            <a href="materias/cda-129.html">129 Anos - Conceição do Araguaia</a>
+            <p>História, Fé e Tradição.</p>
         </div>
-    </nav>
 
-    <section class="content-section">
-        <h1 class="section-title">Matérias e Reportagens</h1>
-
-        <div class="articles-grid">
-
-            <a href="materias/5m.html" class="article-card">
-                <div class="card-image img-budget" style="background-color: #d32f2f; color: #fff; display: flex; align-items: center; justify-content: center; height: 180px;">
-                    <i class="fas fa-file-invoice-dollar" style="font-size: 3.5rem;"></i>
-                </div>
-                <div class="card-content">
-                    <span class="card-category" style="background-color: #ff0000; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">Orçamento Municipal</span>
-                    <h2 class="card-title">A Farra dos Decretos: R$ 5 Milhões Remanejados</h2>
-                    <p>Análise do Decreto 011/2026 que retira recursos da construção do Hospital Municipal e da merenda escolar para custear o gabinete e sentenças[cite: 8, 11, 107, 123, 149].</p>
-                </div>
-                <div class="card-footer">
-                    <span><i class="far fa-calendar-alt"></i> Fevereiro / 2026</span>
-                    <span class="read-more" style="font-weight: bold; color: #ff0000;">VER DENÚNCIA →</span>
-                </div>
-            </a>
-
-            <a href="materias/rua-04-2026.html" class="article-card">
-                <div class="card-image img-infra" style="background-color: #ffcc00; color: #000; display: flex; align-items: center; justify-content: center; height: 180px;">
-                    <i class="fas fa-road" style="font-size: 3rem;"></i>
-                </div>
-                <div class="card-content">
-                    <span class="card-category" style="background-color: #ff0000; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">Infraestrutura</span>
-                    <h2 class="card-title">O Caos Urbano: Rua Ilhada em Conceição do Araguaia</h2>
-                    <p>Análise técnica do Engenheiro Márcio sobre a falta de drenagem e o abandono das vias públicas em abril de 2026.</p>
-                </div>
-                <div class="card-footer">
-                    <span><i class="far fa-calendar-alt"></i> Abril / 2026</span>
-                    <span class="read-more" style="font-weight: bold; color: #ff0000;">VER DENÚNCIA →</span>
-                </div>
-            </a>
-                     
-            <a href="materias/cpi.html" class="article-card">
-                <div class="card-image img-cpi">
-                    <i class="fas fa-gavel"></i>
-                </div>
-                <div class="card-content">
-                    <span class="card-category">Investigação</span>
-                    <h2 class="card-title">Comissão Parlamentar de Inquérito: Acompanhe os desdobramentos</h2>
-                    <p>Análise detalhada sobre as recentes investigações e impactos na administração pública.</p>
-                </div>
-                <div class="card-footer">
-                    <span><i class="far fa-calendar-alt"></i> 2026</span>
-                    <span class="read-more">LER MATÉRIA →</span>
-                </div>
-            </a>
-
-            <a href="materias/sus.html" class="article-card">
-                <div class="card-image img-sus">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="card-content">
-                    <span class="card-category">Saúde Pública</span>
-                    <h2 class="card-title">O Impacto do SUS na Gestão Municipal</h2>
-                    <p>Como o Sistema Único de Saúde tem estruturado o atendimento local e novos projetos.</p>
-                </div>
-                <div class="card-footer">
-                    <span><i class="far fa-calendar-alt"></i> 2026</span>
-                    <span class="read-more">LER MATÉRIA →</span>
-                </div>
-            </a>
-
-            <a href="materias/pf-03-2026.html" class="article-card">
-                <div class="card-image img-pf">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="card-content">
-                    <span class="card-category">Segurança</span>
-                    <h2 class="card-title">Operação Polícia Federal: Atualização de Março/2026</h2>
-                    <p>Informações exclusivas sobre a movimentação realizada em 31 de março.</p>
-                </div>
-                <div class="card-footer">
-                    <span><i class="far fa-calendar-alt"></i> 2026</span>
-                    <span class="read-more">LER MATÉRIA →</span>
-                </div>
-            </a>
-
+        <div class="card-materia">
+            <a href="materias/rua-04-2026.html">Reforma Rua 04 (Abril 2026)</a>
+            <p>Acompanhamento de obras e infraestrutura.</p>
         </div>
-    </section>
 
-    <script>
-        // Script para abrir/fechar menu mobile
-        const menuBtn = document.getElementById('menu-btn');
-        const navMenu = document.getElementById('nav-menu');
+        <div class="card-materia">
+            <a href="materias/pl-03-2026.html">Projeto de Lei 03/2026</a>
+            <p>Transparência e Legislativo municipal.</p>
+        </div>
 
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
+        <div class="card-materia">
+            <a href="materias/sus.html">Sistema Único de Saúde (SUS)</a>
+            <p>Análise e monitoramento de serviços.</p>
+        </div>
+
+        <div class="card-materia">
+            <a href="materias/pad-2022.html">PAD 2022</a>
+            <p>Processo Administrativo Disciplinar.</p>
+        </div>
+
+        <div class="card-materia">
+            <a href="materias/mppa-01.html">MPPA - Atuações</a>
+            <p>Documentação e registros oficiais.</p>
+        </div>
+
+        <div class="card-materia">
+            <a href="materias/contrato-01.html">Contrato 01</a>
+            <p>Detalhes e fiscalização contratual.</p>
+        </div>
+
+        <div class="card-materia">
+            <a href="materias/cpi.html">Relatórios CPI</a>
+            <p>Investigação e prestação de contas.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px;">
+        <a href="index.html" style="color: #007bff;">← Voltar ao Início</a>
+    </footer>
 
 </body>
 </html>
