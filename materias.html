@@ -6,6 +6,64 @@
     <title>Matérias - Márcio O Fiscal do Povo</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Estilo para as frases de fundo (Marca d'água) */
+        body::before {
+            content: "NÃO VOTO EM POLÍTICO CORRUPTO \A LUGAR DE LADRÃO É NA PRISÃO";
+            white-space: pre-wrap;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.03); /* Ajuste aqui para 0.05 se quiser mais visível */
+            z-index: -1;
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+            font-weight: 900;
+        }
+
+        body {
+            font-family: 'Arial Black', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .main-nav {
+            background: #000;
+            padding: 15px 0;
+            border-bottom: 2px solid #333;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
         .materias-container {
             max-width: 1000px;
             margin: 20px auto;
@@ -13,26 +71,40 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
+            position: relative;
         }
+
         .card-materia {
-            background: #1e1e1e;
+            background: rgba(30, 30, 30, 0.9);
             border: 1px solid #333;
             padding: 15px;
             border-radius: 8px;
             transition: 0.3s;
         }
+
         .card-materia:hover {
-            border-color: #007bff;
+            border-color: #ff0000;
+            transform: translateY(-5px);
         }
+
         .card-materia a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
+
         .card-materia p {
             color: #ccc;
-            font-size: 0.9em;
-            margin-top: 5px;
+            font-size: 0.85em;
+            margin: 0;
+            text-transform: none; /* Facilita a leitura */
+        }
+
+        header h1 {
+            color: #d4af37;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -43,65 +115,66 @@
             <div class="nav-logo">MENU</div>
             <button class="mobile-menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html#inicio">INÍCIO</a></li>
+                <li><a href="index.html">INÍCIO</a></li>
             </ul>
         </div>
     </nav>
 
-    <header style="text-align: center; padding: 40px 0;">
+    <header style="text-align: center; padding: 40px 20px;">
         <h1>Acompanhamento de Projetos e Fiscalização</h1>
         <p>MÁRCIO O FISCAL DO POVO</p>
     </header>
 
     <div class="materias-container">
+        
         <div class="card-materia">
-            <a href="materias/wilkens.html" target="_blank">Wilkens - Câmara de Vereadores (13/04/2026)</a>
-            <p>Denúncia sobre o sucateamento da saúde e transporte de pacientes.</p>
+            <a href="materias/wilkens.html">Wilkens - Câmara (13/04/2026)</a>
+            <p>Denúncia urgente sobre o sucateamento da saúde e transporte de pacientes para Redenção.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/sharles-13-04-2026.html" target="_blank">Vereador Sharles - 13/04/2026</a>
+            <a href="materias/sharles-13-04-2026.html">Vereador Sharles - 13/04/2026</a>
             <p>Acompanhamento e registros de fiscalização recente.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/cda-129.html" target="_blank">129 Anos - Conceição do Araguaia</a>
-            <p>História, Fé e Tradicional.</p>
+            <a href="materias/cda-129.html">129 Anos - Conceição do Araguaia</a>
+            <p>História, Fé e Tradição da nossa cidade.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/rua-04-2026.html" target="_blank">Reforma de Rua (Abril 2026)</a>
-            <p>Acompanhamento de obras e infraestrutura.</p>
+            <a href="materias/rua-04-2026.html">Reforma de Rua (Abril 2026)</a>
+            <p>Monitoramento de obras de infraestrutura e pavimentação.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/pf-03-2026.html" target="_blank">Polícia Federal - 03/2026</a>
-            <p>Transparência municipal.</p>
+            <a href="materias/pf-03-2026.html">Polícia Federal - 03/2026</a>
+            <p>Transparência municipal e ações de fiscalização.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/sus.html" target="_blank">Sistema Único de Saúde (SUS)</a>
-            <p>Análise e monitoramento de serviços.</p>
+            <a href="materias/sus.html">Sistema Único de Saúde (SUS)</a>
+            <p>Análise técnica e monitoramento dos serviços de saúde.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/pad-2022.html" target="_blank">PAD 2022 - Márcio Oliveira</a>
-            <p>Processo Administrativo Disciplinar.</p>
+            <a href="materias/pad-2022.html">PAD 2022 - Márcio Oliveira</a>
+            <p>Processo Administrativo Disciplinar e defesa da verdade.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/mppa-01.html" target="_blank">MPPA - Mina de contratados</a>
-            <p>Documentação e registros oficiais.</p>
+            <a href="materias/mppa-01.html">MPPA - Mina de Contratados</a>
+            <p>Documentação enviada ao Ministério Público sobre contratações.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/contrato-01.html" target="_blank">Contrato de servidores - 2026</a>
-            <p>Detalhes e fiscalização contratual.</p>
+            <a href="materias/contrato-01.html">Contrato de Servidores - 2026</a>
+            <p>Detalhes e fiscalização de vínculos contratuais.</p>
         </div>
 
         <div class="card-materia">
-            <a href="materias/cpi.html" target="_blank">CPI da Câmara</a>
-            <p>Investigação nas fraudes em licitações.</p>
+            <a href="materias/cpi.html">CPI da Câmara</a>
+            <p>Investigação de possíveis fraudes em licitações públicas.</p>
         </div>
     </div>
 
