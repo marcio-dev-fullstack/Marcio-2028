@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- 1. RESET E FUNDO --- */
+        /* 1. RESET E CONFIGURAÇÕES GERAIS */
         * {
             margin: 0;
             padding: 0;
@@ -22,12 +22,11 @@
             line-height: 1.6;
         }
 
-        /* --- 2. MENU DE NAVEGAÇÃO --- */
+        /* 2. MENU DE NAVEGAÇÃO COM LOGO (IGUAL À INDEX) */
         .main-nav {
             background-color: #001f3f;
-            padding: 15px 0;
             width: 100%;
-            border-bottom: 3px solid #b8860b;
+            border-bottom: 3px solid #d4af37;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -39,14 +38,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 10px 20px;
         }
 
         .nav-logo {
-            color: #fff;
-            font-weight: 900;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 60px; /* Mantém a logo no tamanho correto */
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
         }
 
         .nav-menu {
@@ -58,7 +62,7 @@
         .nav-menu li a {
             color: #ffffff;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: bold;
             font-size: 13px;
             transition: 0.3s;
         }
@@ -67,7 +71,7 @@
             color: #ffcc00;
         }
 
-        /* --- 3. CABEÇALHO DA PÁGINA --- */
+        /* 3. CABEÇALHO DA PÁGINA */
         .hero-materias {
             background-color: #002b5c;
             color: white;
@@ -78,6 +82,7 @@
         .hero-materias h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
+            font-weight: 900;
         }
 
         .hero-materias p {
@@ -87,7 +92,7 @@
             letter-spacing: 1px;
         }
 
-        /* --- 4. GRADE DE MATÉRIAS (4 COLUNAS) --- */
+        /* 4. GRADE DE MATÉRIAS (4 COLUNAS CENTRALIZADAS) */
         .container-principal {
             max-width: 1240px;
             margin: 50px auto;
@@ -96,11 +101,11 @@
 
         .grade-materias {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 por linha */
+            grid-template-columns: repeat(4, 1fr); /* 4 Cards por linha */
             gap: 25px;
         }
 
-        /* --- 5. ESTILO DO CARD --- */
+        /* 5. ESTILO DO CARD (ESTILO INDEX) */
         .card-materia {
             background: #ffffff;
             border-radius: 10px;
@@ -135,7 +140,7 @@
             margin-bottom: 5px;
         }
 
-        /* --- 6. RODAPÉ (LARGURA TOTAL) --- */
+        /* --- 6. RODAPÉ (LARGURA TOTAL E CENTRALIZADO) --- */
         .footer-final {
             background-color: #001f3f;
             color: #fff;
@@ -156,6 +161,7 @@
             font-size: 1.8rem;
             margin-bottom: 10px;
             text-transform: uppercase;
+            font-weight: 900;
         }
 
         .footer-copyright {
@@ -167,21 +173,20 @@
         .footer-sociais {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         .footer-sociais a {
             color: #fff;
-            font-size: 2rem;
+            font-size: 2.2rem;
             transition: 0.3s;
         }
 
         .footer-sociais a:hover {
             color: #ffcc00;
-            transform: scale(1.1);
         }
 
-        /* --- 7. WHATSAPP FLUTUANTE --- */
+        /* 7. WHATSAPP FLUTUANTE */
         .whatsapp-link {
             position: fixed;
             width: 60px;
@@ -205,6 +210,7 @@
             .grade-materias { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 650px) {
+            .nav-menu { display: none; }
             .grade-materias { grid-template-columns: 1fr; }
             .hero-materias h1 { font-size: 1.6rem; }
         }
@@ -214,24 +220,31 @@
 
     <nav class="main-nav">
         <div class="nav-container">
-            <div class="nav-logo">O Fiscal do Povo</div>
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="img/10.jpg" alt="O Fiscal do Povo" class="logo-img">
+                </a>
+            </div>
             <ul class="nav-menu">
                 <li><a href="index.html">INÍCIO</a></li>
+                <li><a href="index.html#marcio">MÁRCIO</a></li>
+                <li><a href="index.html#propostas">PROPOSTAS</a></li>
+                <li><a href="materias.html">MATÉRIAS</a></li>
                 <li><a href="fotos.html">FOTOS</a></li>                
             </ul>
         </div>
     </nav>
 
     <header class="hero-materias">
-        <h1>Galeria de Matérias</h1>
-        
+        <h1>Acompanhamento e Fiscalização</h1>
+        <p>Márcio O Fiscal do Povo</p>
     </header>
 
     <main class="container-principal">
         <div class="grade-materias">
             <div class="card-materia">
                 <a href="materias/diploma-falso.html">Investigação: Diploma Falso</a>
-                <p>Fiscalização sobre a autenticidade de documentos e qualificações.</p>
+                <p>Fiscalização sobre a autenticidade de documentos no serviço público.</p>
             </div>
           
             <div class="card-materia">
@@ -241,7 +254,7 @@
           
             <div class="card-materia">
                 <a href="materias/sharles-13-04-2026.html">Vereador Sharles</a>
-                <p>Acompanhamento e registros de fiscalização recente (Abril/2026).</p>
+                <p>Acompanhamento de registros e fiscalização em Abril/2026.</p>
             </div>
           
             <div class="card-materia">
@@ -283,6 +296,11 @@
                 <a href="materias/cpi.html">CPI da Câmara</a>
                 <p>Investigação de possíveis fraudes em licitações públicas.</p>
             </div>
+            
+            <div class="card-materia">
+                <a href="index.html#inicio">Voltar ao Início</a>
+                <p>Confira as propostas e biografia oficial.</p>
+            </div>
         </div>
     </main>
 
@@ -292,15 +310,15 @@
             <p class="footer-copyright">© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
             
             <div class="footer-sociais">
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/5594992500073" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/MarcioFiscalDoPovo" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/marcioofiscaldopovo/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@MarcioFiscalDoPovo" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/5594999999999" class="whatsapp-link" target="_blank">
+    <a href="https://wa.me/5594992500073" class="whatsapp-link" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
