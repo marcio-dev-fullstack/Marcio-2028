@@ -217,8 +217,8 @@
         </div>
         
         <div class="menu-toggle" id="mobile-menu">
-            <i class="fas fa-bars"></i>
-        </div>
+          <i class="fas fa-bars"></i>
+      </div>
 
         <ul class="nav-menu">
             <li><a href="index.html">INÍCIO</a></li>
@@ -286,25 +286,27 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     <script>
-      // Seleciona o botão de hambúrguer e o menu
-      const menuToggle = document.getElementById('mobile-menu');
+      // Selecionamos o botão pelo ID e o menu pela CLASSE
+      const menuBtn = document.getElementById('mobile-menu');
       const navMenu = document.querySelector('.nav-menu');
-
-      // Adiciona o evento de clique para abrir/fechar
-      menuToggle.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
-          
-          // Troca o ícone de "barras" para um "X" (times) ao abrir
-          const icon = menuToggle.querySelector('i');
-          icon.classList.toggle('fa-bars');
-          icon.classList.toggle('fa-times');
-      });
-
-      // Fecha o menu automaticamente quando clicar em qualquer link
+  
+      if(menuBtn) {
+          menuBtn.addEventListener('click', function() {
+              console.log("Botão clicado!"); // Se aparecer isso no console, o JS está ok
+              navMenu.classList.toggle('active');
+              
+              // Troca o ícone
+              const icon = this.querySelector('i');
+              icon.classList.toggle('fa-bars');
+              icon.classList.toggle('fa-times');
+          });
+      }
+  
+      // Fecha ao clicar em qualquer link
       document.querySelectorAll('.nav-menu a').forEach(link => {
           link.addEventListener('click', () => {
               navMenu.classList.remove('active');
-              const icon = menuToggle.querySelector('i');
+              const icon = menuBtn.querySelector('i');
               icon.classList.add('fa-bars');
               icon.classList.remove('fa-times');
           });

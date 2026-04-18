@@ -144,3 +144,24 @@ body {
   
   .tab-item i { font-size: 22px; margin-bottom: 2px; }
 }
+
+@media (max-width: 768px) {
+  /* O menu começa escondido */
+  .nav-menu {
+      display: none; 
+      flex-direction: column;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: #001f3f;
+      padding: 20px;
+      z-index: 2000;
+      border-bottom: 3px solid #d4af37;
+  }
+
+  /* ESSA REGRA É A QUE FAZ FUNCIONAR */
+  .nav-menu.active {
+      display: flex !important; /* Força o menu a aparecer */
+  }
+}
