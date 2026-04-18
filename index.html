@@ -6,17 +6,274 @@
     <title>Márcio O Fiscal do Povo</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* 1. RESET E ESTILOS GERAIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 2. MENU DE NAVEGAÇÃO */
+        .main-nav {
+            background-color: #001f3f;
+            padding: 15px 0;
+            width: 100%;
+            border-bottom: 3px solid #d4af37;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-menu li a:hover {
+            color: #ffcc00;
+        }
+
+        /* 3. HERO SECTION (FOTO BEM MENOR) */
+        .hero-section {
+            background-color: #002b5c;
+            color: white;
+            text-align: center;
+            padding: 60px 20px; /* Reduzi o padding vertical */
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .hero-subtitle {
+            font-weight: 800;
+            color: #d4af37;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            max-width: 350px; /* DEFINI O TAMANHO MÁXIMO BEM MENOR */
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        .hero-badge {
+            background: #d4af37;
+            color: #001f3f;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* 4. BIOGRAFIA */
+        .biografia-section {
+            padding: 80px 20px;
+            background: #fff;
+        }
+
+        .container-biografia {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bio-card {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 10px solid #001f3f;
+        }
+
+        .section-title-premium {
+            font-size: 2.2rem;
+            color: #001f3f;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .bio-manifesto {
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        /* 5. METAS GRID */
+        .propostas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .proposta-card-tech {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 8px solid #d4af37;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .proposta-card-tech:hover {
+            transform: translateY(-5px);
+        }
+
+        .proposta-card-tech h3 {
+            color: #001f3f;
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .proposta-card-tech ul li {
+            list-style: none;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .proposta-card-tech ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #25d366;
+            font-weight: bold;
+        }
+
+        /* 6. RODAPÉ (LARGURA TOTAL) */
+        .main-footer {
+            background: #001f3f;
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-logo-title {
+            color: #d4af37;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-sociais {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-sociais a {
+            color: #fff;
+            font-size: 2.5rem;
+            transition: 0.3s;
+        }
+
+        .footer-sociais a:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        /* 7. WHATSAPP FLUTUANTE */
+        .whatsapp-float {
+            position: fixed;
+            width: 65px;
+            height: 65px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-image { max-width: 280px; } /* Ainda menor em mobile */
+            .nav-menu { display: none; }
+        }
+    </style>
 </head>
 <body>
 
     <nav class="main-nav">
         <div class="nav-container">
-            <div class="nav-logo">MENU</div>
-            <button class="mobile-menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html#inicio">INÍCIO</a></li>
-                <li><a href="index.html#marcio">MÁRCIO</a></li>
+            <div class="nav-logo"></div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">INÍCIO</a></li>
+                <li><a href="#marcio">MÁRCIO</a></li>
                 <li><a href="#propostas">PROPOSTAS</a></li>
                 <li><a href="materias.html">MATÉRIAS</a></li>
                 <li><a href="fotos.html">FOTOS</a></li>                
@@ -27,8 +284,7 @@
     <header class="hero-section" id="inicio">
         <div class="hero-content">
             <h1 class="hero-title">Márcio O Fiscal do Povo</h1>
-            <p class="hero-subtitle" style="font-size: 1.1rem; color: #fff; margin-bottom: 5px; opacity: 0.9;"></p>
-            <p class="hero-subtitle" style="font-weight: 800; color: #d4af37; margin-top: 0;">Nosso compromisso é com a geração de empregos.</p>
+            <p class="hero-subtitle">Transparência e Fiscalização em Conceição do Araguaia.</p>
             <div class="hero-image-container">
                 <img src="img/01.jpg" alt="Márcio O Fiscal do Povo" class="hero-image">
                 <div class="hero-badge">Juntos por Conceição do Araguaia - PA</div>
@@ -41,157 +297,70 @@
             <div class="bio-card">
                 <h2 class="section-title-premium">Quem é Márcio</h2>
                 <div class="bio-content">
-                    <p style="text-align: justify; color: #2c3e50; line-height: 1.8; margin-bottom: 20px; font-size: 1.05em;">
-                        <strong style="color: #001220;">MÁRCIO RODRIGUES DE OLIVEIRA</strong>, nascido (21/10/1978 ) em Conceição do Araguaia, filho de Josué (Jesu) Machado de Oliveira e Maria Helena Rodrigues de Oliveira. Casado com Késia de Oliveira Quadros e pai da Maria Eduarda Marinho de Oliveira. Servidor Público da prefeirura de Conceição do Araguaia, cargo de Analista de Sistemas (atuando desde 2012).</p> <br>
-
-                    <p><strong style="color: #001220;">FORMAÇÃO ACADÊMICA: </strong>Engenharia de Software (2005); Licenciatura em Matemática (2022); Engenharia Civil (2023); e Engenharia de Segurança do Trabalho (2023).</p>
-                        
-                    <div class="bio-manifesto" style="border-top: 1px solid #eee; padding-top: 20px; font-style: italic; color: #555; line-height: 1.8;">
-                        "Acredito que ética, transparência e honestidade não são apenas palavras, mas valores que devem orientar cada decisão ao longo da vida... Integridade é fazer o correto mesmo quando ninguém está olhando."
+                    <p style="text-align: justify; color: #2c3e50; line-height: 1.8; margin-bottom: 20px; font-size: 1.1rem;">
+                        <strong style="color: #001220;">MÁRCIO RODRIGUES DE OLIVEIRA</strong>, nascido em 21/10/1978 em Conceição do Araguaia, filho de Josué Machado de Oliveira e Maria Helena Rodrigues de Oliveira. Casado com Késia de Oliveira Quadros e pai da Maria Eduarda. Servidor Público concursado (Analista de Sistemas) desde 2012.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1rem; color: #444;">
+                        <strong style="color: #001220;">FORMAÇÃO ACADÊMICA:</strong><br>
+                        • Engenharia de Software (2005)<br>
+                        • Licenciatura em Matemática (2022)<br>
+                        • Engenharia Civil (2023)<br>
+                        • Engenharia de Segurança do Trabalho (2023)
+                    </p>
+                    <div class="bio-manifesto">
+                        "Integridade é fazer o correto mesmo quando ninguém está olhando. Ética e transparência devem orientar cada decisão pública."
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="propostas-section" id="propostas" style="padding: 80px 20px; background: #f4f7f6;">
-        <div class="container-propostas" style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title-premium" style="text-align: center; color: #003366; margin-bottom: 50px;">81 Metas para uma Nova CDA</h2>
-            
-            <div class="propostas-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+    <section class="propostas-section" id="propostas" style="padding: 100px 20px; background-color: #f4f7f6;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title-premium">81 Metas para uma Nova CDA</h2>
+            <div class="propostas-grid">
                 
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-heartbeat"></i> SAÚDE</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>01. Agendamento de consultas via WhatsApp</li>
-                        <li>02. Mutirão permanente de cirurgias eletivas</li>
-                        <li>03. Farmácia Municipal com atendimento 24h</li>
-                        <li>04. UTI Móvel 100% equipada e disponível</li>
-                        <li>05. Implantação de Telemedicina com especialistas</li>
-                        <li>06. Centro de Reabilitação e Fisioterapia moderno</li>
-                        <li>07. Valorização salarial e técnica dos profissionais</li>
-                        <li>08. Ampliação do atendimento de saúde bucal</li>
-                        <li>09. Unidade móvel de saúde para áreas rurais</li>
+                <div class="proposta-card-tech">
+                    <h3><i class="fas fa-heartbeat"></i> SAÚDE</h3>
+                    <ul>
+                        <li>Agendamento via WhatsApp</li>
+                        <li>Mutirão de cirurgias eletivas</li>
+                        <li>Farmácia Municipal 24h</li>
+                        <li>UTI Móvel 100% equipada</li>
+                        <li>Implantação de Telemedicina</li>
                     </ul>
                 </div>
 
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-book-reader"></i> EDUCAÇÃO</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>10. Escolas municipais em Tempo Integral</li>
-                        <li>11. Climatização de 100% das salas de aula</li>
-                        <li>12. Auxílio universitário para estudantes locais</li>
-                        <li>13. Tablet com material digital para alunos</li>
-                        <li>14. Reforma e modernização de todas as creches</li>
-                        <li>15. Plano de carreira para professores e servidores</li>
-                        <li>16. Programa de reforço escolar no contraturno</li>
-                        <li>17. Incentivo ao esporte e artes no ambiente escolar</li>
-                        <li>18. Biblioteca digital municipal gratuita</li>
+                <div class="proposta-card-tech">
+                    <h3><i class="fas fa-book-reader"></i> EDUCAÇÃO</h3>
+                    <ul>
+                        <li>Escolas em Tempo Integral</li>
+                        <li>Climatização de todas as salas</li>
+                        <li>Auxílio universitário local</li>
+                        <li>Tablet com material digital</li>
+                        <li>Reforma geral das creches</li>
                     </ul>
                 </div>
 
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-briefcase"></i> EMPREGO E RENDA</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>19. Criação do Polo Industrial e Tecnológico</li>
-                        <li>20. Programa municipal "Primeiro Emprego"</li>
-                        <li>21. Banco do Povo para microcrédito orientado</li>
-                        <li>22. Cursos técnicos voltados à mão de obra local</li>
-                        <li>23. Incentivo fiscal para novas empresas em CDA</li>
-                        <li>24. Feira do Empreendedor e artesanato permanente</li>
-                        <li>25. Incubadora de cooperativas agrícolas</li>
-                        <li>26. Balcão de Empregos digital e integrado</li>
-                        <li>27. Capacitação para economia criativa e digital</li>
+                <div class="proposta-card-tech">
+                    <h3><i class="fas fa-briefcase"></i> EMPREGO E RENDA</h3>
+                    <ul>
+                        <li>Polo Industrial e Tecnológico</li>
+                        <li>Programa Primeiro Emprego</li>
+                        <li>Banco do Povo (Microcrédito)</li>
+                        <li>Cursos técnicos mão de obra local</li>
+                        <li>Incentivo fiscal para empresas</li>
                     </ul>
                 </div>
 
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-road"></i> INFRAESTRUTURA</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>28. Pavimentação asfáltica de 100% das ruas</li>
-                        <li>29. Modernização da iluminação pública para LED</li>
-                        <li>30. Saneamento básico e tratamento de esgoto</li>
-                        <li>31. Drenagem profunda para evitar alagamentos</li>
-                        <li>32. Padronização de calçadas com acessibilidade</li>
-                        <li>33. Reforma da rodoviária e terminais urbanos</li>
-                        <li>34. Revitalização de praças e espaços de lazer</li>
-                        <li>35. Ampliação do aterro sanitário municipal</li>
-                        <li>36. Manutenção preventiva de bueiros e canais</li>
-                    </ul>
-                </div>
-
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-tractor"></i> AGRICULTURA</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>37. Patrulha mecanizada para o pequeno produtor</li>
-                        <li>38. Manutenção constante de estradas vicinais</li>
-                        <li>39. Apoio técnico veterinário gratuito (SIM)</li>
-                        <li>40. Compra garantida da produção para merenda</li>
-                        <li>41. Distribuição de sementes e insumos básicos</li>
-                        <li>42. Tanques de resfriamento de leite comunitários</li>
-                        <li>43. Incentivo à piscicultura e hortas comunitárias</li>
-                        <li>44. Programa de inseminação artificial bovina</li>
-                        <li>45. Feira livre do produtor rural revitalizada</li>
-                    </ul>
-                </div>
-
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-shield-alt"></i> SEGURANÇA</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>46. Implantação da Guarda Municipal armada</li>
-                        <li>47. Videomonitoramento 24h (Muralha Digital)</li>
-                        <li>48. Fortalecimento do CONSEG municipal</li>
-                        <li>49. Iluminação reforçada em pontos críticos</li>
-                        <li>50. Patrulha Maria da Penha municipal</li>
-                        <li>51. Monitoramento inteligente nas escolas</li>
-                        <li>52. Programa de combate às drogas nas escolas</li>
-                        <li>53. Regularização fundiária urbana e rural</li>
-                        <li>54. Base de apoio da Guarda em distritos</li>
-                    </ul>
-                </div>
-
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-users"></i> SOCIAL</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>55. Loteamento social e auxílio-reforma</li>
-                        <li>56. Centro de Apoio à Melhor Idade ativo</li>
-                        <li>57. CRAS e CREAS com atendimento volante</li>
-                        <li>58. Cozinha Comunitária para famílias carentes</li>
-                        <li>59. Centro de Referência para Autismo (TEA)</li>
-                        <li>60. Qualificação profissional para mães solo</li>
-                        <li>61. Atendimento psicossocial nas comunidades</li>
-                        <li>62. Inclusão digital para a terceira idade</li>
-                        <li>63. Casa de Apoio para tratamentos fora de sede</li>
-                    </ul>
-                </div>
-
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-laptop-code"></i> GESTÃO TÉCNICA</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>64. Auditoria digital das contas públicas</li>
-                        <li>65. Wi-Fi gratuito em todas as praças públicas</li>
-                        <li>66. Aplicativo "Prefeitura na Mão" para serviços</li>
-                        <li>67. Gestão sem papel (Digitalização total)</li>
-                        <li>68. Ouvidoria ativa e canal direto via Zap</li>
-                        <li>69. Transparência real sobre licitações e gastos</li>
-                        <li>70. Fim de cargos comissionados sem critério</li>
-                        <li>71. Central de Projetos para captação de recursos</li>
-                        <li>72. Desburocratização para abertura de MEI</li>
-                    </ul>
-                </div>
-
-                <div class="proposta-card-tech" style="background: white; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <h3 style="color: #003366; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-swimmer"></i> TURISMO/ESPORTE</h3>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 1.6; color: #444;">
-                        <li>73. Arena Poliesportiva para grandes eventos</li>
-                        <li>74. Escolinhas de base para todas as crianças</li>
-                        <li>75. Estruturação profissional do veraneio/praias</li>
-                        <li>76. Criação do calendário cultural anual oficial</li>
-                        <li>77. Incentivo financeiro para atletas de ponta</li>
-                        <li>78. Ciclovias integradas pela cidade</li>
-                        <li>79. Apoio às comunidades tradicionais e festas</li>
-                        <li>80. Museu da História de CDA revitalizado</li>
-                        <li>81. Reforma completa dos estádios de bairro</li>
+                <div class="proposta-card-tech">
+                    <h3><i class="fas fa-road"></i> INFRAESTRUTURA</h3>
+                    <ul>
+                        <li>Pavimentação 100% das ruas</li>
+                        <li>Iluminação pública em LED</li>
+                        <li>Saneamento e tratamento de esgoto</li>
+                        <li>Drenagem profunda anti-alagamento</li>
+                        <li>Revitalização de todas as praças</li>
                     </ul>
                 </div>
 
@@ -199,20 +368,22 @@
         </div>
     </section>
 
-    <footer class="main-footer" style="background: #001a33; padding: 60px 20px; border-top: 5px solid #d4af37; text-align: center;">
-        <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: #d4af37; font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase;">Márcio O Fiscal do Povo</h2>
-            <p style="color: white; margin-bottom: 30px;">© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
-            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
-                <a href="https://wa.me/5594992500073" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.facebook.com/MarcioFiscalDoPovo" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/marcioofiscaldopovo/" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@MarcioFiscalDoPovo" target="_blank" style="color: white; font-size: 2.5rem;"><i class="fab fa-youtube"></i></a>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <h2 class="footer-logo-title">Márcio O Fiscal do Povo</h2>
+            <p>© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
+            <div class="footer-sociais">
+                <a href="https://wa.me/5594992500073" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/MarcioFiscalDoPovo" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/marcioofiscaldopovo/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@MarcioFiscalDoPovo" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/5594992500073" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <script src="script.js"></script>
+    <a href="https://wa.me/5594992500073" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
 </body>
 </html>

@@ -1,233 +1,269 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fotos - Márcio o Fiscal do Povo</title>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos - Márcio O Fiscal do Povo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-      /* 1. RESET E FUNDO */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #002b5c; /* Azul marinho do fundo */
-        color: #ffffff;
-        line-height: 1.6;
-      }
-
-      /* 2. MENU HORIZONTAL (STICKY) */
-      nav {
-        background-color: #001f3f;
-        padding: 20px 0;
-        width: 100%;
-        border-bottom: 2px solid #b8860b; /* Linha dourada */
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 25px;
-      }
-
-      nav ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        transition: 0.3s;
-      }
-
-      nav ul li a:hover {
-        color: #ffcc00; /* Amarelo ao passar o mouse */
-      }
-
-      /* 3. TÍTULO */
-      h1 {
-        text-align: center;
-        margin: 40px 0;
-        font-size: 2.5rem;
-        color: #ffffff;
-      }
-
-      /* 4. GRADE DA GALERIA (JANELAS) */
-      .galeria-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      /* 5. ESTILO DO CARD (SEM CORTE) */
-      .foto-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .foto-card:hover {
-        transform: translateY(-8px);
-      }
-
-      /* AJUSTE PARA NÃO CORTAR AS FOTOS */
-      .foto-card img {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: contain;
-      }
-
-      .legenda {
-        padding: 15px;
-        text-align: center;
-        font-weight: bold;
-        color: #ffcc00;
-        font-size: 14px;
-      }
-
-      /* 6. RESPONSIVIDADE (CELULAR) */
-      @media (max-width: 768px) {
-        nav ul {
-          flex-direction: column;
-          gap: 15px;
-          padding: 10px;
+        /* 1. RESET E FUNDO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #002b5c; /* Azul marinho de fundo */
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* 2. MENU NAVEGAÇÃO (STICKY) */
+        .main-nav {
+            background-color: #001f3f;
+            padding: 15px 0;
+            width: 100%;
+            border-bottom: 2px solid #b8860b; /* Linha dourada */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-menu li a:hover {
+            color: #ffcc00;
+        }
+
+        /* 3. TÍTULO DA PÁGINA */
+        .titulo-galeria {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .titulo-galeria h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .titulo-galeria p {
+            color: #ffcc00;
+            font-weight: 700;
+        }
+
+        /* 4. GRADE DA GALERIA (CARDS) */
         .galeria-container {
-          grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
         }
-      }
+
+        /* 5. ESTILO DO CARD DE FOTO */
+        .foto-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .foto-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffcc00;
+        }
+
+        .foto-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover; /* Mantém o padrão sem distorcer */
+            display: block;
+        }
+
+        .legenda {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #ffcc00;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* 6. RODAPÉ (LARGURA TOTAL) */
+        .footer-final {
+            background-color: #001f3f;
+            color: #fff;
+            padding: 60px 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-titulo {
+            color: #ffcc00;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .footer-sociais {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .footer-sociais a {
+            color: #fff;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .footer-sociais a:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        /* 7. WHATSAPP FLUTUANTE */
+        .whatsapp-link {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 10px;
+            }
+            .nav-menu li a {
+                font-size: 11px;
+            }
+            .titulo-galeria h1 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
     <nav class="main-nav">
         <div class="nav-container">
-          
-            <button class="mobile-menu-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html#inicio">INÍCIO</a></li>
+            <div class="nav-logo">Márcio O Fiscal do Povo</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">INÍCIO</a></li>
                 <li><a href="index.html#marcio">MÁRCIO</a></li>
-                <li><a href="#propostas">PROPOSTAS</a></li>
                 <li><a href="materias.html">MATÉRIAS</a></li>
                 <li><a href="fotos.html">FOTOS</a></li>                
             </ul>
         </div>
     </nav>
 
-    <h2>Álbum de Fotos</h2>
+    <header class="titulo-galeria">
+        <h1>Galeria de Fotos</h1>
+        <p>Ações e Fiscalizações em Conceição do Araguaia</p>
+    </header>
 
-    <div class="galeria-container">
-      <div class="foto-card">
-        <img src="img/00.jpg" alt="Bom dia Márcio" />
-        <div class="legenda">Bandeira do Brasil</div>
-      </div>
-
-      <div class="foto-card">
-        <img src="img/01.jpg" alt="Aline vice 2028" />
-        <div class="legenda">Bandeira de Conceição do Araguaia</div>
-      </div>
-
-      <div class="foto-card">
-        <img src="img/02.jpeg" alt="Bom dia Márcio" />
-        <div class="legenda">Bom dia CDA</div>
-      </div>
-
-      <div class="foto-card">
-        <img src="img/03.png" alt="Prefeito em 2028" />
-        <div class="legenda">Pré-canditato à prefeito em 2028</div>
-      </div>
-
-      <div class="foto-card">
-        <img src="img/04.jpeg" alt="O Fiscal do Povo" />
-        <div class="legenda">Márcio "O Fiscal do Povo"</div>
-      </div>
-
-      <div class="foto-card">
-        <img src="img/05.jpeg" alt="Boa noite CDA" />
-        <div class="legenda">Boa noite CDA</div>
-      </div>
-
-    <footer
-      class="main-footer"
-      style="
-        background: #001a33;
-        padding: 60px 20px;
-        border-top: 5px solid #d4af37;
-        text-align: center;
-      "
-    >
-      <div
-        style="
-          max-width: 1000px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        "
-      >
-        <h2
-          style="
-            color: #d4af37;
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-          "
-        >
-          Márcio O Fiscal do Povo
-        </h2>
-        <p style="color: white; margin-bottom: 30px">
-          © 2026 Todos os direitos reservados. Conceição do Araguaia - PA
-        </p>
-        <div
-          style="
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-          "
-        >
-          <a
-            href="https://wa.me/5594992500073"
-            target="_blank"
-            style="color: white; font-size: 2.5rem"
-            ><i class="fab fa-whatsapp"></i
-          ></a>
-          <a
-            href="https://www.facebook.com/MarcioFiscalDoPovo"
-            target="_blank"
-            style="color: white; font-size: 2.5rem"
-            ><i class="fab fa-facebook"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/marcioofiscaldopovo/"
-            target="_blank"
-            style="color: white; font-size: 2.5rem"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a
-            href="https://www.youtube.com/@MarcioFiscalDoPovo"
-            target="_blank"
-            style="color: white; font-size: 2.5rem"
-            ><i class="fab fa-youtube"></i
-          ></a>
+    <main class="galeria-container">
+        
+        <div class="foto-card">
+            <img src="img/foto1.jpg" alt="Fiscalização">
+            <div class="legenda">Fiscalização em Obras Públicas</div>
         </div>
-      </div>
+
+        <div class="foto-card">
+            <img src="img/foto2.jpg" alt="Atendimento">
+            <div class="legenda">Ouvindo a Comunidade</div>
+        </div>
+
+        <div class="foto-card">
+            <img src="img/foto3.jpg" alt="Reunião">
+            <div class="legenda">Ação na Câmara Municipal</div>
+        </div>
+
+        <div class="foto-card">
+            <img src="img/foto4.jpg" alt="Saúde">
+            <div class="legenda">Visita técnica ao Posto de Saúde</div>
+        </div>
+
+        </main>
+
+    <footer class="footer-final">
+        <div class="footer-container">
+            <h2 class="footer-titulo">MÁRCIO O FISCAL DO POVO</h2>
+            <p class="footer-copyright">© 2026 Todos os direitos reservados. Conceição do Araguaia - PA</p>
+            
+            <div class="footer-sociais">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
     </footer>
-  </body>
+
+    <a href="https://wa.me/5594999999999" class="whatsapp-link" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
 </html>
