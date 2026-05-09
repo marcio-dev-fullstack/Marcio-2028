@@ -33,7 +33,6 @@
             padding-bottom: 80px; 
         }
 
-        /* APP BAR */
         .app-header {
             background: var(--primary);
             color: var(--white);
@@ -44,7 +43,8 @@
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            text-align: center;
         }
 
         .app-header h1 {
@@ -52,7 +52,6 @@
             font-family: 'Merriweather', serif;
         }
 
-        /* PROFILE SECTION */
         .profile-card {
             background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
             color: white;
@@ -94,7 +93,6 @@
             margin: 0 auto;
         }
 
-        /* MATÉRIA EM DESTAQUE - GALERIA */
         .featured-card {
             background: var(--white);
             border-radius: 15px;
@@ -154,7 +152,6 @@
             margin-bottom: 15px;
         }
 
-        /* FOOTER */
         .footer {
             background: var(--dark);
             color: white;
@@ -176,7 +173,6 @@
             margin-bottom: 15px;
         }
 
-        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -208,9 +204,7 @@
 <body>
 
     <header class="app-header">
-        <i class="fas fa-bars"></i>
         <h1>Blog do Professor Márcio</h1>
-        <i class="fas fa-search"></i>
     </header>
 
     <section class="profile-card">
@@ -229,41 +223,38 @@
         
         <div class="counter-widget">
             <div style="font-size: 1.4rem; font-weight: 900;" id="visit-counter">2.000</div>
-            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">VISITANTES</div>
+            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">Acompanhando a política em 2028</div>
         </div>
 
         <h2 class="section-title"><i class="fas fa-star"></i> Matéria em Destaque</h2>
         
-        <!-- MATÉRIA PRINCIPAL ATUALIZADA -->
         <article class="featured-card">
             <div class="image-stack">
-                <img src="pecuaria01.jpeg" alt="Márcio e Professor Vitor">
-                <img src="pecuaria03.jpeg" alt="Evento Pecuária">
-                <img src="pecuaria02.jpeg" alt="Apoiadores na Pecuária">
+                <img src="pecuaria01.jpeg" alt="União de Forças: Márcio e Professor Vitor demonstram sintonia durante o evento na Pecuária.">
+                <img src="pecuaria03.jpeg" alt="Diálogo Aberto: Os líderes conversam sobre o futuro de Conceição do Araguaia sob o olhar atento de apoiadores.">
+                <img src="pecuaria02.jpeg" alt="Apoio e Presença: O encontro contou com a participação de figuras importantes, consolidando a base de uma possível aliança.">
             </div>
             <div class="card-content">
                 <div class="meta">
                     <span><i class="far fa-calendar"></i> 08 de Maio de 2028</span>
-                    <span style="color:var(--accent); font-weight:700">EXCLUSIVO</span>
+                    <span style="color:var(--accent); font-weight:700">POLÍTICA</span>
                 </div>
-                <h3>Márcio "O Fiscal do Povo" e Professor Vitor: O Encontro que Mira 2028</h3>
+                <h3>Márcio "O Fiscal do Povo" e Professor Vitor: O Encontro que Sacudiu a Pecuária e Mira 2028</h3>
                 <div class="article-text">
-                    <p>O clima na tradicional Feira Agropecuária desta noite transbordou política. Márcio "O Fiscal do Povo" e o Professor Vitor foram vistos em intensa sintonia, alimentando as discussões sobre uma possível coligação para as eleições de 2028.</p>
-                    <p>Enquanto Márcio traz o peso da fiscalização rigorosa e sua experiência multidisciplinar na engenharia, Vitor agrega o diálogo social e o mestre da educação. Este encontro estratégico no coração de Conceição do Araguaia marca o início de uma nova articulação que promete sacudir as estruturas locais.</p>
-                    <h3>O "Fiscal" e o "Mestre": Uma Coligação de Peso?</h3>
-                    <p>Márcio, amplamente conhecido por sua atuação rigorosa na fiscalização dos recursos públicos e defesa dos interesses do cidadão, parece ter encontrado no Professor Vitor o equilíbrio ideal para uma chapa majoritária. Enquanto Márcio traz o vigor da engenharia e da transparência administrativa, o Professor Vitor agrega o valor da educação e do diálogo social.</p>
-                    <p>A escolha da Pecuária como palco para essa aparição pública conjunta é estratégica. No coração do evento mais popular da cidade, a dupla sentiu de perto o termômetro das ruas. Entre um "selfie" e outro, o coro de "O Fiscal do Povo" ecoava, agora acompanhado da chancela do Professor Vitor.</p>
-                    <p>Se 2028 ainda parece longe para alguns, para os articuladores políticos de Conceição do Araguaia, a corrida começou hoje. A possível coligação promete unir a expertise técnica de Márcio — que acumula títulos em Engenharia Civil, de Engenharia de Software e Engenharia de Segurança do Trabalho — com a experiência pedagógica e política necessária para gerir o município.</p>
+                    <p>O clima na tradicional Feira Agropecuária desta noite não era apenas de festa, mas de intensa movimentação política. O destaque absoluto ficou para o encontro entre duas figuras de peso na cena local: Márcio "O Fiscal do Povo" e o Professor Vitor. O aperto de mão e as conversas ao pé do ouvido entre os dois líderes não deixaram dúvidas para os presentes: uma grande coligação para as eleições de 2028 está sendo desenhada.</p>
                     
+                    <p>Márcio, amplamente conhecido por sua atuação rigorosa na fiscalização dos recursos públicos e defesa dos interesses do cidadão, parece ter encontrado no Professor Vitor o equilíbrio ideal para uma chapa majoritária. Enquanto Márcio traz o vigor da engenharia e da transparência administrativa, o Professor Vitor agrega o valor da educação e do diálogo social.</p>
+                    
+                    <p>A escolha da Pecuária como palco para essa aparição pública conjunta é estratégica. No coração do evento mais popular da cidade, a dupla sentiu de perto o termômetro das ruas. Se 2028 ainda parece longe para alguns, para os articuladores políticos de Conceição do Araguaia, a corrida começou hoje.</p>
                 </div>
-                <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;"><p>Fique ligado no Blog do Professor Márcio para mais atualizações sobre os bastidores desta aliança que promete sacudir as estruturas do Pará.</p></a>
+                <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Fique ligado no Blog do Professor Márcio para mais atualizações sobre os bastidores desta aliança que promete sacudir as estruturas do Pará.</a>
             </div>
         </article>
 
         <h2 class="section-title"><i class="fas fa-newspaper"></i> Outras Notícias</h2>
-        <article class="featured-card" style="padding: 15px;">
+        <article class="featured-card" style="padding: 15px; margin-bottom: 10px;">
             <div class="meta"><span>07/05/2028</span></div>
-            <h4 style="font-family: 'Merriweather', serif;">Câmara Municipal discute novos investimentos</h4>
+            <h4 style="font-family: 'Merriweather', serif; font-size: 1rem;">Câmara Municipal discute novos investimentos urbanos</h4>
         </article>
 
     </div>
