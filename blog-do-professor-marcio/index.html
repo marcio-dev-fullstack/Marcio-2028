@@ -93,6 +93,24 @@
             margin: 0 auto;
         }
 
+        /* ANIMAÇÃO PISCANTE */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .counter-widget {
+            background: var(--dark);
+            color: var(--secondary);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid var(--secondary);
+            animation: blink 1.5s infinite ease-in-out; /* Aplica o efeito de piscar */
+        }
+
         .featured-card {
             background: var(--white);
             border-radius: 15px;
@@ -141,15 +159,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .counter-widget {
-            background: var(--dark);
-            color: var(--secondary);
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 15px;
         }
 
         .footer {
@@ -223,16 +232,16 @@
         
         <div class="counter-widget">
             <div style="font-size: 1.4rem; font-weight: 900;" id="visit-counter">2.000</div>
-            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">Número de Visitante</div>
+            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">Acompanhando a política em 2028</div>
         </div>
 
         <h2 class="section-title"><i class="fas fa-star"></i> Matéria em Destaque</h2>
         
         <article class="featured-card">
             <div class="image-stack">
-                <img src="pecuaria01.jpeg" alt="União de Forças: Márcio e Professor Vitor demonstram sintonia durante o evento na Pecuária.">
-                <img src="pecuaria03.jpeg" alt="Diálogo Aberto: Os líderes conversam sobre o futuro de Conceição do Araguaia sob o olhar atento de apoiadores.">
-                <img src="pecuaria02.jpeg" alt="Apoio e Presença: O encontro contou com a participação de figuras importantes, consolidando a base de uma possível aliança.">
+                <img src="pecuaria01.jpeg" alt="Márcio e Professor Vitor">
+                <img src="pecuaria03.jpeg" alt="Encontro na Pecuária">
+                <img src="pecuaria02.jpeg" alt="Lideranças locais">
             </div>
             <div class="card-content">
                 <div class="meta">
@@ -249,14 +258,20 @@
                 </div>
                 <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none; font-size: 0.9rem;">Fique ligado no Blog do Professor Márcio para mais atualizações sobre os bastidores desta aliança que promete sacudir as estruturas do Pará.</a>
             </div>
-        </article>
-
-        <h2 class="section-title"><i class="fas fa-newspaper"></i> Outras Notícias</h2>
-        <article class="featured-card" style="padding: 15px; margin-bottom: 10px;">
-            <div class="meta"><span>07/05/2028</span></div>
-            <h4 style="font-family: 'Merriweather', serif; font-size: 1rem;">Câmara Municipal discute novos investimentos urbanos</h4>
-        </article>
-
+            <h2 class="section-title"><i class="fas fa-newspaper"></i> Outras Notícias</h2>
+            <article class="featured-card" style="padding: 15px; margin-bottom: 10px; border-left: 5px solid var(--secondary);">
+                <div class="meta"><span>Veja mais análises</span></div>
+                
+                <p style="font-size: 0.9rem; color: #555; margin-bottom: 12px;">
+                    Fique por dentro de tudo o que acontece nos bastidores da política local, denúncias exclusivas e o acompanhamento detalhado da nossa cidade.
+                </p>
+            
+                <a href="materias.html" target="_blank" style="text-decoration: none; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+                    <h4 style="font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 900;">
+                        Clique aqui para acessar o arquivo completo de matérias <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                    </h4>
+                </a>
+            </article>
     </div>
 
     <footer class="footer">
