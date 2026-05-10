@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blog do Professor Márcio - App</title>
+    <title>Blog do Professor Márcio - Notícias de CDA</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -217,7 +217,7 @@
     </header>
 
     <section class="profile-card">
-        <img src="../img/001.jpg" alt="Márcio" class="profile-img-mini" onerror="this.src='https://via.placeholder.com/70x90'">
+        <img src="img/01.jpg" alt="Márcio" class="profile-img-mini" onerror="this.src='https://via.placeholder.com/70x90'">
         <div class="profile-info">
             <h2>Professor Márcio</h2>
             <p><i class="fab fa-whatsapp"></i> (94) 99250-0073</p>
@@ -232,16 +232,17 @@
         
         <div class="counter-widget">
             <div style="font-size: 1.4rem; font-weight: 900;" id="visit-counter">2.000</div>
-            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">Visualizações</div>
+            <div style="font-size: 0.65rem; color: white; text-transform: uppercase;">Visualizações do Blog</div>
         </div>
 
         <h2 class="section-title"><i class="fas fa-star"></i> Matéria em Destaque</h2>
         
         <article class="featured-card">
             <div class="image-stack">
-                <img src="pecuaria01.jpeg" alt="Márcio e Professor Vitor">
-                <img src="pecuaria03.jpeg" alt="Encontro na Pecuária">
-                <img src="pecuaria02.jpeg" alt="Lideranças locais">
+                <img src="img/pecuaria01.jpeg" alt="Márcio e Professor Vitor">
+                <img src="img/pecuaria02.jpeg" alt="Lideranças locais">
+                <img src="img/pecuaria03.jpeg" alt="Encontro na Pecuária">
+                
             </div>
             <div class="card-content">
                 <div class="meta">
@@ -306,7 +307,7 @@
     <script>
         function updateCounter() {
             const initialValue = 2000;
-            const increment = 10;
+            const increment = 7;
             let currentVisits = localStorage.getItem('blogVisits');
             if (!currentVisits) {
                 currentVisits = initialValue;
