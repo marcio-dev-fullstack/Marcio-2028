@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEU INSS ATRASADO - MARCIO O FISCAL DO POVO</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho-fogo: #ff1a1a;
+            --vermelho-escuro: #8b0000;
+            --laranja-alerta: #ff4500;
+            --amarelo-perigo: #ffd700;
+            --preto: #0a0a0a;
+            --cinza-escuro: #1a1a1a;
+            --branco: #ffffff;
+            --verde-ok: #00ff41;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--preto);
+            color: var(--branco);
+            overflow-x: hidden;
+        }
+
+        /* FAIXA DE ALERTA PISCANTE */
+        .alerta-topo {
+            background: repeating-linear-gradient(
+                45deg,
+                var(--vermelho-fogo),
+                var(--vermelho-fogo) 10px,
+                var(--laranja-alerta) 10px,
+                var(--laranja-alerta) 20px
+            );
+            padding: 12px;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            animation: piscar 0.8s infinite alternate;
+            border-bottom: 4px solid var(--amarelo-perigo);
+        }
+
+        @keyframes piscar {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(180deg, var(--vermelho-escuro) 0%, var(--preto) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--vermelho-fogo);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff0000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--vermelho-fogo);
+            text-shadow: 0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.4);
+            letter-spacing: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitulo {
+            font-size: 1.4rem;
+            color: var(--amarelo-perigo);
+            margin-top: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .fiscal-badge {
+            display: inline-block;
+            background: var(--vermelho-fogo);
+            color: var(--branco);
+            padding: 8px 30px;
+            margin-top: 15px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            transform: skew(-10deg);
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* DADOS DO SEGURADO */
+        .dados-segurado {
+            background: var(--cinza-escuro);
+            padding: 25px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 6px solid var(--vermelho-fogo);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .dados-segurado .item {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .dados-segurado .item span.label {
+            color: var(--laranja-alerta);
+            font-weight: 700;
+        }
+
+        .dados-segurado .item span.valor {
+            color: var(--branco);
+        }
+
+        /* CARDS DE IMPACTO */
+        .cards-impacto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--cinza-escuro) 0%, #2a0000 100%);
+            border: 2px solid var(--vermelho-fogo);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card .numero {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--vermelho-fogo);
+            text-shadow: 0 0 15px rgba(255,0,0,0.6);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card .descricao {
+            font-size: 0.95rem;
+            color: var(--amarelo-perigo);
+            margin-top: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card .subdesc {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SEÇÃO DE DENÚNCIA */
+        .denuncia {
+            background: linear-gradient(90deg, var(--vermelho-escuro), var(--preto));
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            border: 3px solid var(--vermelho-fogo);
+        }
+
+        .denuncia h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--vermelho-fogo);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .denuncia .texto {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            color: #ddd;
+        }
+
+        .denuncia .texto strong {
+            color: var(--amarelo-perigo);
+        }
+
+        .denuncia .texto .criminoso {
+            background: var(--vermelho-fogo);
+            color: var(--branco);
+            padding: 2px 8px;
+            font-weight: 800;
+            border-radius: 4px;
+        }
+
+        /* DESTINATÁRIOS */
+        .destinatarios {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+        }
+
+        .dest {
+            background: linear-gradient(135deg, #1a0000, #330000);
+            border: 2px solid var(--laranja-alerta);
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .dest .orgao {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--laranja-alerta);
+        }
+
+        .dest .acao {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* DASHBOARD GRÁFICOS */
+        .dashboard {
+            padding: 20px;
+        }
+
+        .dash-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--amarelo-perigo);
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            border-bottom: 2px solid var(--vermelho-fogo);
+            padding-bottom: 10px;
+        }
+
+        .graficos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .grafico-box {
+            background: var(--cinza-escuro);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .grafico-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--vermelho-fogo);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* TABELA DE MESES ATRASADOS */
+        .tabela-container {
+            margin: 20px;
+            overflow-x: auto;
+        }
+
+        .tabela-container h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--vermelho-fogo);
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: var(--vermelho-escuro);
+            color: var(--amarelo-perigo);
+            padding: 12px 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #444;
+        }
+
+        td {
+            padding: 10px 8px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        tr:nth-child(even) { background: #111; }
+        tr:nth-child(odd) { background: #1a1a1a; }
+        tr:hover { background: #2a0000; }
+
+        .bloqueado {
+            background: #330000 !important;
+            color: var(--vermelho-fogo);
+            font-weight: 700;
+        }
+
+        .faltante {
+            background: #332200 !important;
+            color: var(--laranja-alerta);
+            font-weight: 700;
+        }
+
+        .ok {
+            background: #002200 !important;
+            color: var(--verde-ok);
+        }
+
+        /* TIMELINE DOS PREFEITOS */
+        .timeline-prefeitos {
+            margin: 30px 20px;
+            padding: 25px;
+            background: var(--cinza-escuro);
+            border-radius: 15px;
+            border: 2px solid var(--vermelho-fogo);
+        }
+
+        .timeline-prefeitos h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--amarelo-perigo);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .prefeito-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(90deg, #1a0000, var(--preto));
+            border-left: 5px solid var(--vermelho-fogo);
+            border-radius: 8px;
+        }
+
+        .prefeito-card .nome {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--vermelho-fogo);
+            min-width: 120px;
+        }
+
+        .prefeito-card .periodo {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--amarelo-perigo);
+            font-size: 0.95rem;
+        }
+
+        .prefeito-card .responsabilidade {
+            flex: 1;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .prefeito-card .status {
+            background: var(--vermelho-fogo);
+            color: var(--branco);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* RODAPÉ */
+        .rodape {
+            background: var(--vermelho-escuro);
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 5px solid var(--vermelho-fogo);
+        }
+
+        .rodape h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--amarelo-perigo);
+            letter-spacing: 4px;
+        }
+
+        .rodape p {
+            margin-top: 10px;
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .rodape .hashtag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--vermelho-fogo);
+            margin-top: 15px;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .graficos-grid { grid-template-columns: 1fr; }
+            .cards-impacto { grid-template-columns: 1fr 1fr; }
+            .card .numero { font-size: 2.5rem; }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--preto); }
+        ::-webkit-scrollbar-thumb { background: var(--vermelho-fogo); border-radius: 5px; }
+
+        /* ANIMAÇÃO DE ENTRADA */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="alerta-topo">
+    ⚠️ URGENTE — PREVIDÊNCIA ROUBADA — EXIGIMOS PROVIDÊNCIAS IMEDIATAS ⚠️
+</div>
+
+<header class="header">
+    <h1>MEU INSS ATRASADO</h1>
+    <div class="subtitulo">Extrato CNIS Fraudado / Bloqueado / Sonegado</div>
+    <div class="fiscal-badge">MARCIO O FISCAL DO POVO</div>
+</header>
+
+<!-- DADOS DO SEGURADO -->
+<section class="dados-segurado fade-in">
+    <div class="item"><span class="label">NOME:</span> <span class="valor">MARCIO RODRIGUES DE OLIVEIRA</span></div>
+    <div class="item"><span class="label">NASCIMENTO:</span> <span class="valor">21/10/1978</span></div>
+    <div class="item"><span class="label">EMISSÃO:</span> <span class="valor">13/05/2026 17:15:56</span></div>
+</section>
+
+<!-- CARDS DE IMPACTO -->
+<section class="cards-impacto fade-in">
+    <div class="card">
+        <div class="numero">100</div>
+        <div class="descricao">MESES NÃO COMPUTADOS</div>
+        <div class="subdesc">Bloqueados + Faltantes no CNIS</div>
+    </div>
+    <div class="card">
+        <div class="numero">57</div>
+        <div class="descricao">MESES BLOQUEADOS</div>
+        <div class="subdesc">PREM-BLOQ-EC103 — EC 103/2019</div>
+    </div>
+    <div class="card">
+        <div class="numero">43</div>
+        <div class="descricao">MESES FALTANTES</div>
+        <div class="subdesc">Sumidos do extrato CNIS</div>
+    </div>
+    <div class="card">
+        <div class="numero">R$ 373K</div>
+        <div class="descricao">EM REMUNERAÇÕES BLOQUEADAS</div>
+        <div class="subdesc">Prejuízo direto ao segurado</div>
+    </div>
+    <div class="card">
+        <div class="numero">13+</div>
+        <div class="descricao">ANOS DE TRABALHO</div>
+        <div class="subdesc">Município de Conceição do Araguaia-PA</div>
+    </div>
+    <div class="card">
+        <div class="numero">4</div>
+        <div class="descricao">GESTÕES ENVOLVIDAS</div>
+        <div class="subdesc">Ex-prefeitos + Prefeita atual</div>
+    </div>
+</section>
+
+<!-- DENÚNCIA -->
+<section class="denuncia fade-in">
+    <h2>🔥 DENÚNCIA FORMAL 🔥</h2>
+    <div class="texto">
+        <p>Eu, <strong>MARCIO RODRIGUES DE OLIVEIRA</strong>, servidor público municipal de <strong>Conceição do Araguaia – PA</strong>, 
+        venho a público denunciar o <span class="criminoso">ROUBO PREVIDENCIÁRIO</span> sistemático praticado contra mim 
+        por gestões sucessivas do município, resultando em <strong>100 MESES NÃO COMPUTADOS</strong> no meu tempo de contribuição ao INSS.</p>
+        <br>
+        <p>O extrato CNIS (Cadastro Nacional de Informações Sociais) comprova:</p>
+        <ul style="margin: 15px 0 15px 30px; color: #ff6666;">
+            <li><strong>57 meses BLOQUEADOS</strong> com o indicador PREM-BLOQ-EC103 — remunerações que foram pagas, descontadas, mas NÃO computadas como tempo de contribuição.</li>
+            <li><strong>43 meses FALTANTES</strong> — competências inteiras que simplesmente sumiram do extrato, como se eu nunca tivesse trabalhado.</li>
+            <li>Indicadores de <strong>IREM-INDPEND</strong> (remunerações com pendências), <strong>PEXT</strong> (informação extemporânea) e <strong>PRPPS</strong> (vínculo de servidor público) em ambos os vínculos municipais.</li>
+        </ul>
+        <p>Esta é uma <span class="criminoso">FRAUDE PREVIDENCIÁRIA</span> que prejudica diretamente minha aposentadoria, 
+        meu tempo de serviço e meus direitos constitucionais. Os recolhimentos foram descontados em folha de pagamento, 
+        mas o INSS alega que as informações estão bloqueadas para ajuste entre competências — ajuste que NUNCA é feito 
+        pela prefeitura!</p>
+    </div>
+</section>
+
+<!-- DESTINATÁRIOS -->
+<section style="text-align:center; margin: 30px 0;">
+    <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--amarelo-perigo); letter-spacing: 3px;">
+        EXIGIMOS PROVIDÊNCIAS DE:
+    </h2>
+    <div class="destinatarios">
+        <div class="dest">
+            <div class="orgao">INSS</div>
+            <div class="acao">Regularização imediata dos vínculos. Desbloqueio das competências. Complementação dos meses faltantes.</div>
+        </div>
+        <div class="dest">
+            <div class="orgao">MPF</div>
+            <div class="acao">Ação Civil Pública por improbidade. Investigação de desvio de recursos previdenciários. Responsabilização dos gestores.</div>
+        </div>
+        <div class="dest">
+            <div class="orgao">POLÍCIA FEDERAL</div>
+            <div class="acao">Investigação de fraudes previdenciárias. Sonegação de contribuições. Crimes contra a previdência social (Lei 9.983/2000).</div>
+        </div>
+        <div class="dest">
+            <div class="orgao">CGU / TCU</div>
+            <div class="acao">Auditoria das contas do município. Verificação do repasse de contribuições previdenciárias ao INSS.</div>
+        </div>
+    </div>
+</section>
+
+<!-- TIMELINE DOS PREFEITOS -->
+<section class="timeline-prefeitos fade-in">
+    <h3>🏛️ GESTÕES MUNICIPAIS RESPONSÁVEIS — CONCEIÇÃO DO ARAGUAIA/PA</h3>
+
+    <div class="prefeito-card">
+        <div class="nome">ALVARO</div>
+        <div class="periodo">Ex-Prefeito</div>
+        <div class="responsabilidade">Responsável pelo início do vínculo em 11/06/2012. Primeiras remunerações com pendências (IREM-INDPEND, PEXT). Não regularizou informações previdenciárias.</div>
+        <div class="status">CULPADO</div>
+    </div>
+
+    <div class="prefeito-card">
+        <div class="nome">VALTER</div>
+        <div class="periodo">Ex-Prefeito</div>
+        <div class="responsabilidade">Manteve vínculo sem regularização. Meses faltantes começam a aparecer (2014-2016). Nenhuma providência para desbloqueio das competências.</div>
+        <div class="status">CULPADO</div>
+    </div>
+
+    <div class="prefeito-card">
+        <div class="nome">JAIR</div>
+        <div class="periodo">Ex-Prefeito</div>
+        <div class="responsabilidade">Período com maior número de meses faltantes (2017-2021) e início dos bloqueios PREM-BLOQ-EC103. Deixou de repassar/contribuir corretamente ao INSS.</div>
+        <div class="status">CULPADO</div>
+    </div>
+
+    <div class="prefeito-card">
+        <div class="nome">ELIDA</div>
+        <div class="periodo">Prefeita Atual</div>
+        <div class="responsabilidade">Mantém o vínculo ativo mas NÃO regulariza as pendências. Continua enviando informações bloqueadas (PREM-BLOQ-EC103 em 2022-2026). Omissão criminosa.</div>
+        <div class="status">CULPADA</div>
+    </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard fade-in">
+    <div class="dash-title">📊 DASHBOARD — DADOS DO EXTRATO CNIS</div>
+
+    <div class="graficos-grid">
+        <div class="grafico-box">
+            <h3>MESES BLOQUEADOS POR ANO (Vínculo 6 — Prefeitura)</h3>
+            <canvas id="chartBloqueadosV6"></canvas>
+        </div>
+        <div class="grafico-box">
+            <h3>MESES BLOQUEADOS POR ANO (Vínculo 7 — Fundo Municipal)</h3>
+            <canvas id="chartBloqueadosV7"></canvas>
+        </div>
+        <div class="grafico-box">
+            <h3>VALOR BLOQUEADO POR ANO (R$)</h3>
+            <canvas id="chartValorBloqueado"></canvas>
+        </div>
+        <div class="grafico-box">
+            <h3>MESES FALTANTES POR ANO (Vínculo 7)</h3>
+            <canvas id="chartFaltantes"></canvas>
+        </div>
+    </div>
+
+    <!-- GRÁFICO DE PIZZA: TOTAL -->
+    <div class="grafico-box" style="max-width: 600px; margin: 0 auto 30px;">
+        <h3>DISTRIBUIÇÃO DO PREJUÍZO TOTAL</h3>
+        <canvas id="chartPizza"></canvas>
+    </div>
+</section>
+
+<!-- TABELA COMPLETA DE MESES BLOQUEADOS VÍNCULO 6 -->
+<section class="tabela-container fade-in">
+    <h3>📋 VÍNCULO 6 — MUNICÍPIO DE CONCEIÇÃO DO ARAGUAIA (CNPJ: 05.070.404/0001-69) — MESES BLOQUEADOS</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ANO</th><th>JAN</th><th>FEV</th><th>MAR</th><th>ABR</th><th>MAI</th><th>JUN</th>
+                <th>JUL</th><th>AGO</th><th>SET</th><th>OUT</th><th>NOV</th><th>DEZ</th><th>TOTAL ANO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>2022</strong></td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">3 meses<br>R$17.555</td>
+            </tr>
+            <tr>
+                <td><strong>2023</strong></td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$7.858</td>
+                <td class="bloqueado">BLOQ<br>R$5.893</td>
+                <td class="bloqueado">BLOQ<br>R$5.893</td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">12 meses<br>R$74.839</td>
+            </tr>
+            <tr>
+                <td><strong>2024</strong></td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td class="bloqueado">BLOQ<br>R$6.483</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$8.720</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$6.392</td>
+                <td class="bloqueado">BLOQ<br>R$6.540</td>
+                <td class="bloqueado">BLOQ<br>R$6.540</td>
+                <td class="bloqueado">BLOQ<br>R$6.540</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">12 meses<br>R$79.662</td>
+            </tr>
+            <tr>
+                <td><strong>2025</strong></td>
+                <td class="bloqueado">BLOQ<br>R$7.135</td>
+                <td class="bloqueado">BLOQ<br>R$7.135</td>
+                <td class="bloqueado">BLOQ<br>R$7.135</td>
+                <td class="bloqueado">BLOQ<br>R$7.135</td>
+                <td class="bloqueado">BLOQ<br>R$7.135</td>
+                <td class="bloqueado">BLOQ<br>R$11.180</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">12 meses<br>R$92.669</td>
+            </tr>
+            <tr>
+                <td><strong>2026</strong></td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$7.635</td>
+                <td class="bloqueado">BLOQ<br>R$8.460</td>
+                <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">3 meses<br>R$23.730</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align:center; color:var(--laranja-alerta); margin-top:10px; font-size:0.9rem;">
+        Indicador: <strong>PREM-BLOQ-EC103</strong> — Pendência de bloqueio de remuneração/contribuição para ajuste entre competências (EC 103/2019)
+    </p>
+</section>
+
+<!-- TABELA COMPLETA DE MESES BLOQUEADOS VÍNCULO 7 -->
+<section class="tabela-container fade-in">
+    <h3>📋 VÍNCULO 7 — FUNDO MUNICIPAL DE EDUCAÇÃO (CNPJ: 13.840.043/0001-27) — MESES BLOQUEADOS</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ANO</th><th>JAN</th><th>FEV</th><th>MAR</th><th>ABR</th><th>MAI</th><th>JUN</th>
+                <th>JUL</th><th>AGO</th><th>SET</th><th>OUT</th><th>NOV</th><th>DEZ</th><th>TOTAL ANO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>2020</strong></td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ<br>R$5.008</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="bloqueado">BLOQ<br>R$5.008</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">2 BLOQ + 10 FALT</td>
+            </tr>
+            <tr>
+                <td><strong>2021</strong></td>
+                <td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ<br>R$5.008</td>
+                <td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ<br>R$5.008</td>
+                <td class="bloqueado">BLOQ<br>R$5.008</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ<br>R$5.158</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">4 BLOQ + 8 FALT</td>
+            </tr>
+            <tr>
+                <td><strong>2022</strong></td>
+                <td class="bloqueado">BLOQ<br>R$5.158</td>
+                <td class="bloqueado">BLOQ<br>R$5.158</td>
+                <td class="bloqueado">BLOQ<br>R$5.158</td>
+                <td class="bloqueado">BLOQ<br>R$7.763</td>
+                <td class="bloqueado">BLOQ<br>R$5.809</td>
+                <td class="bloqueado">BLOQ<br>R$7.802</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="bloqueado">BLOQ<br>R$5.851</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td style="color:var(--vermelho-fogo);font-weight:800;">9 meses<br>R$54.406</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align:center; color:var(--laranja-alerta); margin-top:10px; font-size:0.9rem;">
+        Vínculo encerrado em 09/2022. Indicadores: IREM-INDPEND, PEXT, PRPPS
+    </p>
+</section>
+
+<!-- TABELA DE MESES FALTANTES VÍNCULO 7 -->
+<section class="tabela-container fade-in">
+    <h3>📋 VÍNCULO 7 — MESES FALTANTES NO CNIS (COMPETÊNCIAS SUMIDAS)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ANO</th><th>JAN</th><th>FEV</th><th>MAR</th><th>ABR</th><th>MAI</th><th>JUN</th>
+                <th>JUL</th><th>AGO</th><th>SET</th><th>OUT</th><th>NOV</th><th>DEZ</th><th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>2014</strong></td>
+                <td class="ok">OK</td><td class="faltante">FALT</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">1</td>
+            </tr>
+            <tr>
+                <td><strong>2016</strong></td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="faltante">FALT</td><td class="ok">OK</td><td class="faltante">FALT</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">2</td>
+            </tr>
+            <tr>
+                <td><strong>2017</strong></td>
+                <td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td><td class="ok">OK</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="ok">OK</td>
+                <td class="faltante">FALT</td><td class="ok">OK</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">6</td>
+            </tr>
+            <tr>
+                <td><strong>2018</strong></td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="ok">OK</td><td class="faltante">FALT</td><td class="ok">OK</td>
+                <td class="ok">OK</td><td class="ok">OK</td><td>-</td><td>-</td><td>-</td><td>-</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">4</td>
+            </tr>
+            <tr>
+                <td><strong>2019</strong></td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">12</td>
+            </tr>
+            <tr>
+                <td><strong>2020</strong></td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="bloqueado">BLOQ</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">10 FALT + 2 BLOQ</td>
+            </tr>
+            <tr>
+                <td><strong>2021</strong></td>
+                <td class="faltante">FALT</td><td class="bloqueado">BLOQ</td><td class="faltante">FALT</td>
+                <td class="bloqueado">BLOQ</td><td class="bloqueado">BLOQ</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="faltante">FALT</td>
+                <td class="faltante">FALT</td><td class="faltante">FALT</td><td class="bloqueado">BLOQ</td>
+                <td style="color:var(--laranja-alerta);font-weight:800;">8 FALT + 4 BLOQ</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align:center; color:var(--laranja-alerta); margin-top:10px; font-size:0.9rem;">
+        <strong>TOTAL: 43 MESES FALTANTES</strong> — Estes meses simplesmente NÃO aparecem no extrato CNIS, como se nunca tivessem existido!
+    </p>
+</section>
+
+<!-- LEGENDA DOS INDICADORES -->
+<section class="denuncia fade-in" style="margin-top: 30px;">
+    <h2>⚠️ LEGENDA DOS INDICADORES CRIMINOSOS</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid var(--vermelho-fogo);">
+            <strong style="color:var(--vermelho-fogo);">PREM-BLOQ-EC103</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Pendência de bloqueio de remuneração/contribuição para ajuste entre competências. O tempo NÃO é computado!</span>
+        </div>
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid var(--laranja-alerta);">
+            <strong style="color:var(--laranja-alerta);">IREM-INDPEND</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Remunerações com indicadores/pendências. Informações inconsistentes enviadas pelo empregador.</span>
+        </div>
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid var(--amarelo-perigo);">
+            <strong style="color:var(--amarelo-perigo);">PEXT</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Vínculo com informação extemporânea, passível de comprovação. Dados enviados fora do prazo legal.</span>
+        </div>
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid #ff00ff;">
+            <strong style="color:#ff00ff;">PRPPS</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Vínculo de empregado com informações de Regime Próprio (Servidor Público). Deveria estar regularizado!</span>
+        </div>
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid #00ffff;">
+            <strong style="color:#00ffff;">IVIN-JORN-DIFERENCIADA</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Vínculo possui regime de jornada diferenciada. Requer tratamento especial no INSS.</span>
+        </div>
+        <div style="background: #1a0000; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6600;">
+            <strong style="color:#ff6600;">PREM-EXT</strong><br>
+            <span style="color:#aaa; font-size:0.9rem;">Remuneração informada fora do prazo, passível de comprovação. Atraso criminoso na entrega.</span>
+        </div>
+    </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer class="rodape">
+    <h2>JUSTIÇA PREVIDENCIÁRIA JÁ!</h2>
+    <p>Este documento é baseado no Extrato Previdenciário CNIS emitido em 13/05/2026.</p>
+    <p>Código de autenticidade: <strong>260513NLI73OO8OQRCME08</strong></p>
+    <p>Verificação em: <a href="https://meu.inss.gov.br/central/#/autenticidade" style="color:var(--amarelo-perigo);">meu.inss.gov.br/central/#/autenticidade</a></p>
+    <div class="hashtag">#MARCIOOFISCALDOVOVO #INSSATRASADO #PREVIDENCIAROUBADA #CONCEICAODOARAGUAIA</div>
+    <p style="margin-top:20px; font-size:0.85rem; color:#888;">
+        Documento elaborado por MARCIO RODRIGUES DE OLIVEIRA — Servidor Público Municipal — Conceição do Araguaia/PA
+    </p>
+</footer>
+
+<script>
+// GRÁFICO 1: Meses bloqueados Vínculo 6 por ano
+const ctx1 = document.getElementById('chartBloqueadosV6').getContext('2d');
+new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ['2022', '2023', '2024', '2025', '2026'],
+        datasets: [{
+            label: 'Meses Bloqueados',
+            data: [3, 12, 12, 12, 3],
+            backgroundColor: 'rgba(255, 26, 26, 0.8)',
+            borderColor: '#ff1a1a',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#fff' }, grid: { color: '#333' } },
+            x: { ticks: { color: '#fff' }, grid: { color: '#333' } }
+        }
+    }
+});
+
+// GRÁFICO 2: Meses bloqueados Vínculo 7 por ano
+const ctx2 = document.getElementById('chartBloqueadosV7').getContext('2d');
+new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['2020', '2021', '2022'],
+        datasets: [{
+            label: 'Meses Bloqueados',
+            data: [2, 4, 9],
+            backgroundColor: 'rgba(255, 69, 0, 0.8)',
+            borderColor: '#ff4500',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#fff' }, grid: { color: '#333' } },
+            x: { ticks: { color: '#fff' }, grid: { color: '#333' } }
+        }
+    }
+});
+
+// GRÁFICO 3: Valor bloqueado por ano
+const ctx3 = document.getElementById('chartValorBloqueado').getContext('2d');
+new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+        datasets: [
+            {
+                label: 'Vínculo 6 (Prefeitura)',
+                data: [0, 0, 17555.55, 74839.07, 79662.41, 92669.69, 23730.81],
+                borderColor: '#ff1a1a',
+                backgroundColor: 'rgba(255, 26, 26, 0.2)',
+                fill: true,
+                tension: 0.4
+            },
+            {
+                label: 'Vínculo 7 (Fundo Municipal)',
+                data: [10017.74, 20185.00, 54406.77, 0, 0, 0, 0],
+                borderColor: '#ff4500',
+                backgroundColor: 'rgba(255, 69, 0, 0.2)',
+                fill: true,
+                tension: 0.4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#fff', callback: v => 'R$ ' + (v/1000).toFixed(0) + 'K' }, grid: { color: '#333' } },
+            x: { ticks: { color: '#fff' }, grid: { color: '#333' } }
+        }
+    }
+});
+
+// GRÁFICO 4: Meses faltantes por ano
+const ctx4 = document.getElementById('chartFaltantes').getContext('2d');
+new Chart(ctx4, {
+    type: 'bar',
+    data: {
+        labels: ['2014', '2016', '2017', '2018', '2019', '2020', '2021'],
+        datasets: [{
+            label: 'Meses Faltantes no CNIS',
+            data: [1, 2, 6, 4, 12, 10, 8],
+            backgroundColor: 'rgba(255, 215, 0, 0.8)',
+            borderColor: '#ffd700',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+            y: { beginAtZero: true, ticks: { color: '#fff' }, grid: { color: '#333' } },
+            x: { ticks: { color: '#fff' }, grid: { color: '#333' } }
+        }
+    }
+});
+
+// GRÁFICO 5: Pizza — Distribuição do prejuízo
+const ctx5 = document.getElementById('chartPizza').getContext('2d');
+new Chart(ctx5, {
+    type: 'doughnut',
+    data: {
+        labels: ['V6 Bloqueado (42 meses)', 'V7 Bloqueado (15 meses)', 'V7 Faltante (43 meses)'],
+        datasets: [{
+            data: [42, 15, 43],
+            backgroundColor: ['#ff1a1a', '#ff4500', '#ffd700'],
+            borderColor: '#0a0a0a',
+            borderWidth: 3
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { labels: { color: '#fff', font: { size: 14 } } }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
