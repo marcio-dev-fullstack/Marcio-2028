@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Jurídica - Termos Aditivos | Conceição do Araguaia/PA</title>
+    <style>
+        :root {
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --success: #16a34a;
+            --primary: #1e40af;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--danger);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .badge-danger {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-warning {
+            display: inline-block;
+            background: var(--warning);
+            color: #78350f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+        }
+
+        .summary-card.critical { border-left-color: var(--danger); }
+        .summary-card.warning { border-left-color: var(--warning); }
+        .summary-card.info { border-left-color: var(--primary); }
+
+        .summary-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-card.critical .number { color: var(--danger); }
+        .summary-card.warning .number { color: var(--warning); }
+        .summary-card.info .number { color: var(--primary); }
+
+        .summary-card .label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .contract-card {
+            background: var(--card);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .contract-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .contract-header h2 {
+            font-size: 1.25rem;
+            color: var(--text);
+        }
+
+        .contract-body {
+            padding: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            background: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+        }
+
+        .info-item .label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-item .value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .violations {
+            margin-top: 1.5rem;
+        }
+
+        .violations h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .violation-item {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .violation-item.warning-item {
+            background: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        .violation-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .violation-content h4 {
+            font-size: 0.95rem;
+            color: var(--danger);
+            margin-bottom: 0.25rem;
+        }
+
+        .violation-item.warning-item .violation-content h4 {
+            color: #92400e;
+        }
+
+        .violation-content p {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .violation-content .legal-ref {
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .severity.critical {
+            background: var(--danger);
+            color: white;
+        }
+
+        .severity.high {
+            background: #ea580c;
+            color: white;
+        }
+
+        .severity.medium {
+            background: var(--warning);
+            color: #78350f;
+        }
+
+        .legal-framework {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .legal-framework h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .legal-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .legal-item:last-child {
+            border-bottom: none;
+        }
+
+        .legal-item .article {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .legal-item .desc {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .highlight-box h2 {
+            color: var(--danger);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box p {
+            color: #7f1d1d;
+            font-size: 1rem;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .timeline-item .date {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .timeline-item .label {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .timeline-arrow {
+            color: #94a3b8;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.4rem; }
+            .summary-cards { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .contract-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <h1>🔍 ANÁLISE JURÍDICA DE TERMINOS ADITIVOS</h1>
+    <p class="subtitle">Prefeitura Municipal de Conceição do Araguaia/PA — Diário Oficial 14/05/2026</p>
+    <p class="subtitle">Avaliação de Conformidade com a Lei de Licitações e Contratos</p>
+</header>
+
+<div class="container">
+
+    <!-- RESUMO EXECUTIVO -->
+    <div class="highlight-box">
+        <h2>⚠️ RESUMO DA ANÁLISE</h2>
+        <p>Foram identificadas <strong>IRREGULARIDADES GRAVES</strong> nos 3 (três) termos aditivos analisados, incluindo extrapolação de limites legais de acréscimo quantitativo (46,62% — quase o DOBRO do permitido), inaplicabilidade de fundamentação legal e possível fraude à licitação.</p>
+    </div>
+
+    <div class="summary-cards">
+        <div class="summary-card critical">
+            <div class="number">3</div>
+            <div class="label">Contratos Analisados</div>
+        </div>
+        <div class="summary-card critical">
+            <div class="number">3</div>
+            <div class="label">Irregularidades Graves</div>
+        </div>
+        <div class="summary-card warning">
+            <div class="number">1</div>
+            <div class="label">Violação de Limite Percentual</div>
+        </div>
+        <div class="summary-card warning">
+            <div class="number">R$ 19,3M</div>
+            <div class="label">Valor em Risco (Aditivo 3)</div>
+        </div>
+    </div>
+
+    <!-- MARCO LEGAL -->
+    <div class="legal-framework">
+        <h2>📋 MARCO LEGAL APLICÁVEL</h2>
+
+        <div class="legal-item">
+            <div class="article">Lei nº 14.133/2021 (Nova Lei de Licitações)</div>
+            <div class="desc">Art. 107 — Prorrogação de contratos de serviços e fornecimentos contínuos (limite máximo decenal de 10 anos). Art. 125 — Limites de 25% para acréscimos/supressões unilaterais.</div>
+        </div>
+
+        <div class="legal-item">
+            <div class="article">Lei nº 8.666/1993 (Lei de Licitações — revogada em parte)</div>
+            <div class="desc">Art. 65, §1º — Limite de 25% para acréscimos em contratos de obras, serviços ou compras; 50% para reforma de edifício. Art. 57 — Prazo máximo de 60 meses para serviços contínuos.</div>
+        </div>
+
+        <div class="legal-item">
+            <div class="article">Lei nº 9.648/1998</div>
+            <div class="desc">Alterou o art. 65, §2º da Lei 8.666/93, vedando extrapolação dos limites percentuais, salvo supressões por acordo.</div>
+        </div>
+
+        <div class="legal-item">
+            <div class="article">Constituição Federal, Art. 37, XXI</div>
+            <div class="desc">Vedação às contratações por dispensa de licitação que frustrem a finalidade da modalidade escolhida ou que se caracterizem como fraude à lei.</div>
+        </div>
+    </div>
+
+    <!-- CONTRATO 1 -->
+    <div class="contract-card">
+        <div class="contract-header">
+            <h2>📄 Contrato nº 024/2025 — 1º Termo Aditivo</h2>
+            <span class="badge-danger">IRREGULARIDADE GRAVE</span>
+        </div>
+        <div class="contract-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="label">Contratada</div>
+                    <div class="value">Pillar Construção e Serviço Ltda</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">CNPJ</div>
+                    <div class="value">07.442.183/0001-44</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Órgão Gestor</div>
+                    <div class="value">Secretaria Municipal de Educação e Cultura</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Objeto</div>
+                    <div class="value">Reforma e ampliação da E.E.E.F.M. Prof. José Wilson P. Leite</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Tipo de Aditivo</div>
+                    <div class="value">Prorrogação de Prazo</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Vigência Aditivo</div>
+                    <div class="value">17/04/2026 a 16/04/2027</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Fundamento Legal</div>
+                    <div class="value">Art. 107, Lei nº 14.133/2021</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Convênio</div>
+                    <div class="value">nº 054/2024 SEDUC</div>
+                </div>
+            </div>
+
+            <div class="violations">
+                <h3>🚨 Irregularidades Identificadas</h3>
+
+                <div class="violation-item">
+                    <div class="violation-icon">❌</div>
+                    <div class="violation-content">
+                        <h4>INAPLICABILIDADE DO ART. 107 DA LEI 14.133/2021</h4>
+                        <p>O art. 107 da Lei 14.133/2021 <strong>aplica-se exclusivamente a contratos de SERVIÇOS E FORNECIMENTOS CONTÍNUOS</strong>, definidos no art. 6º, inc. XV como "serviços contratados e compras realizadas pela Administração Pública para a <strong>manutenção da atividade administrativa</strong>, decorrentes de necessidades permanentes ou prolongadas".</p>
+                        <p>O objeto em questão é <strong>obra de engenharia</strong> (reforma e ampliação de escola), não serviço contínuo. Aplica-se, portanto, o art. 111 da mesma Lei (prorrogação automática por não conclusão de escopo) ou, subsidiariamente, as regras da Lei 8.666/93.</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, arts. 6º, XV; 107; 111 | TCU — Manual de Licitações 5ª Ed.</div>
+                    </div>
+                    <span class="severity critical">CRÍTICO</span>
+                </div>
+
+                <div class="violation-item warning-item">
+                    <div class="violation-icon">⚠️</div>
+                    <div class="violation-content">
+                        <h4>FALTA DE PUBLICAÇÃO DE JUSTIFICATIVA TÉCNICA</h4>
+                        <p>O extrato não menciona a existência de parecer técnico justificando a necessidade da prorrogação, nem atestações de vantajosidade econômica ou consulta a certidões negativas (CEIS/CNEP), exigidas pelo art. 91, §4º da Lei 14.133/2021.</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, art. 91, §4º</div>
+                    </div>
+                    <span class="severity medium">MÉDIO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRATO 2 -->
+    <div class="contract-card">
+        <div class="contract-header">
+            <h2>📄 Contrato nº 065/2022 — 10º Termo Aditivo</h2>
+            <span class="badge-danger">IRREGULARIDADE GRAVE</span>
+        </div>
+        <div class="contract-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="label">Contratada</div>
+                    <div class="value">Virginia Duarte Lopes Nascimento Ltda</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">CNPJ</div>
+                    <div class="value">12.109.281/0001-02</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Órgão Gestor</div>
+                    <div class="value">Secretaria Municipal de Infraestrutura e Desenvolvimento Urbano</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Objeto</div>
+                    <div class="value">Saneamento básico — abastecimento de água</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Tipo de Aditivo</div>
+                    <div class="value">Prorrogação de Prazo (10º aditivo)</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Vigência Aditivo</div>
+                    <div class="value">15/05/2026 a 14/09/2026</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Fundamento Legal</div>
+                    <div class="value">§ 1º do inc. IV, art. 57 da Lei nº 8.666/93</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Termo Compromisso</div>
+                    <div class="value">TC/PAC 0760/14-FUNASA</div>
+                </div>
+            </div>
+
+            <div class="violations">
+                <h3>🚨 Irregularidades Identificadas</h3>
+
+                <div class="violation-item">
+                    <div class="violation-icon">❌</div>
+                    <div class="violation-content">
+                        <h4>EXTRAPOLAÇÃO DO PRAZO MÁXIMO DE 60 MESES (5 ANOS)</h4>
+                        <p>Contrato originário de <strong>2022</strong>. O 10º termo aditivo prorroga até <strong>14/09/2026</strong>. Considerando prorrogações sucessivas desde 2022, o contrato extrapola com certeza o limite de <strong>60 meses</strong> previsto no art. 57, inc. II da Lei 8.666/93.</p>
+                        <p>Ainda que aplicável a Lei 14.133/2021 (por força do art. 193), o limite seria de <strong>10 anos</strong> (art. 107), mas exige previsão em edital e atestação de vantajosidade — requisitos não demonstrados no extrato.</p>
+                        <div class="legal-ref">📖 Lei 8.666/93, art. 57, inc. II | Lei 14.133/2021, art. 107</div>
+                    </div>
+                    <span class="severity critical">CRÍTICO</span>
+                </div>
+
+                <div class="violation-item">
+                    <div class="violation-icon">❌</div>
+                    <div class="violation-content">
+                        <h4>FUNDAMENTO LEGAL INADEQUADO / LEI REVOGADA</h4>
+                        <p>O extrato cita o <strong>art. 57 da Lei 8.666/93</strong>, que foi <strong>revogado</strong> pela Lei 14.133/2021 para contratos de serviços contínuos. O regime atual é disciplinado pelos arts. 106 e 107 da nova lei. A aplicação retroativa de norma revogada configura <strong>erro de direito</strong>.</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, art. 193 (revogação) | arts. 106 e 107 (novo regime)</div>
+                    </div>
+                    <span class="severity high">ALTO</span>
+                </div>
+
+                <div class="violation-item warning-item">
+                    <div class="violation-icon">⚠️</div>
+                    <div class="violation-content">
+                        <h4>QUANTIDADE EXCESSIVA DE ADITIVOS (10º)</h4>
+                        <p>A necessidade de <strong>10 (dez) termos aditivos</strong> sucessivos para um único contrato evidencia <strong>falha grave no planejamento</strong> da contratação original, potencial configuradora de fraude à licitação (art. 333 do CP) ou improbidade administrativa (Lei 8.429/92).</p>
+                        <div class="legal-ref">📖 Art. 333, CP | Lei 8.429/92, art. 10</div>
+                    </div>
+                    <span class="severity high">ALTO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTRATO 3 -->
+    <div class="contract-card">
+        <div class="contract-header">
+            <h2>📄 Contrato nº 061/2022 — 7º Termo Aditivo (Acréscimo)</h2>
+            <span class="badge-danger">IRREGULARIDADE GRAVÍSSIMA</span>
+        </div>
+        <div class="contract-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="label">Contratada</div>
+                    <div class="value">Jn Prestação de Serviços Ltda</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">CNPJ</div>
+                    <div class="value">05.027.166/0001-15</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Órgão Gestor</div>
+                    <div class="value">Secretaria Municipal de Infraestrutura e Desenvolvimento Urbano</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Objeto</div>
+                    <div class="value">Execução de superestrutura de 12 pontes de concreto armado</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Tipo de Aditivo</div>
+                    <div class="value">Acréscimo de Quantitativos (7º aditivo)</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Percentual de Acréscimo</div>
+                    <div class="value" style="color: var(--danger); font-size: 1.2rem;">46,62% DO VALOR INICIAL</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Valor Total do Aditivo</div>
+                    <div class="value" style="color: var(--danger); font-size: 1.1rem;">R$ 19.339.092,33</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Fundamento Legal</div>
+                    <div class="value">Art. 65, § 1º, Lei nº 8.666/93</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">2022</div>
+                    <div class="label">Contrato Original</div>
+                </div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-item">
+                    <div class="date">7 Aditivos</div>
+                    <div class="label">Sucessivos</div>
+                </div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-item">
+                    <div class="date" style="color: var(--danger);">+46,62%</div>
+                    <div class="label">Acréscimo Total</div>
+                </div>
+            </div>
+
+            <div class="violations">
+                <h3>🚨 Irregularidades Identificadas</h3>
+
+                <div class="violation-item">
+                    <div class="violation-icon">🚫</div>
+                    <div class="violation-content">
+                        <h4>VIOLAÇÃO FLAGRANTE DO LIMITE DE 25% — QUASE O DOBRO DO PERMITIDO</h4>
+                        <p>O acréscimo de <strong>46,62%</strong> do valor inicial <strong>extrapola em 86,5%</strong> o limite legal de <strong>25%</strong> previsto no art. 65, §1º da Lei 8.666/93 para contratos de obras e serviços.</p>
+                        <p>Mesmo na hipótese de reforma de edifício (50%), o valor ainda excederia o permitido. O §2º do art. 65 veda expressamente que "nenhum acréscimo ou supressão poderá exceder os limites estabelecidos", salvo supressões por acordo.</p>
+                        <p><strong>Valor extrapolado:</strong> Aproximadamente <strong>R$ 8 milhões</strong> acima do limite legal de 25%.</p>
+                        <div class="legal-ref">📖 Lei 8.666/93, art. 65, §§ 1º e 2º | Lei 9.648/98 | Súmula TCU</div>
+                    </div>
+                    <span class="severity critical">CRÍTICO</span>
+                </div>
+
+                <div class="violation-item">
+                    <div class="violation-icon">❌</div>
+                    <div class="violation-content">
+                        <h4>FRaude À LICITAÇÃO / DESVIO DE OBJETO</h4>
+                        <p>O acréscimo de 46,62% em 11 itens distintos (1.2.7, 1.3.7, 1.4.7, 1.5.7, 1.6.7, 2.3.7, 2.4.7, 2.5.7, 2.6.7, 2.7.7, 2.8.7) sugere <strong>reformulação do projeto original</strong>, não mera alteração quantitativa. Isso caracteriza potencial <strong>desvio de objeto</strong> ou <strong>fraude à licitação</strong>, pois a Administração está, via aditivos, contratando obra que deveria ter sido licitada separadamente.</p>
+                        <div class="legal-ref">📖 CF, art. 37, XXI | Lei 14.133/2021, art. 126 | Art. 333, CP</div>
+                    </div>
+                    <span class="severity critical">CRÍTICO</span>
+                </div>
+
+                <div class="violation-item">
+                    <div class="violation-icon">❌</div>
+                    <div class="violation-content">
+                        <h4>APLICAÇÃO DE LEI PARCIALMENTE REVOGADA</h4>
+                        <p>O extrato cita o art. 65 da Lei 8.666/93 como fundamento. Embora o art. 65 ainda tenha aplicabilidade residual (art. 193 da Lei 14.133/2021), a nova lei estabelece no art. 125 limites semelhantes para acréscimos unilaterais. No entanto, <strong>aditivos consensuais</strong> na nova lei não têm limites expressos — o que NÃO autoriza extrapolação, dada a vedação à transfiguração do objeto (art. 126).</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, arts. 125, 126, 193</div>
+                    </div>
+                    <span class="severity high">ALTO</span>
+                </div>
+
+                <div class="violation-item warning-item">
+                    <div class="violation-icon">⚠️</div>
+                    <div class="violation-content">
+                        <h4>AUSÊNCIA DE JUSTIFICATIVA TÉCNICA DETALHADA</h4>
+                        <p>O extrato não apresenta: (i) memorial descritivo das alterações; (ii) parecer do setor técnico; (iii) estudo de viabilidade econômica; (iv) atestação de que as condições permanecem vantajosas; (v) consulta ao CEIS/CNEP.</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, arts. 91, §4º; 107; IN 05/2017 SEGES/MP</div>
+                    </div>
+                    <span class="severity medium">MÉDIO</span>
+                </div>
+
+                <div class="violation-item warning-item">
+                    <div class="violation-icon">⚠️</div>
+                    <div class="violation-content">
+                        <h4>VALOR EXPRESSIVO SEM TRANSPARÊNCIA</h4>
+                        <p>R$ 19,3 milhões em acréscimo representa valor superior a muitas licitações integras. A ausência de detalhamento dos quantitativos unitários e preços unitários dos 11 itens impossibilita auditoria pública.</p>
+                        <div class="legal-ref">📖 Lei 14.133/2021, art. 91 | Lei 12.527/2011 (LAI)</div>
+                    </div>
+                    <span class="severity medium">MÉDIO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCLUSÃO -->
+    <div class="contract-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%); border: 2px solid var(--danger);">
+        <div class="contract-header" style="border-bottom-color: #fecaca;">
+            <h2 style="color: var(--danger);">📊 CONCLUSÃO E RECOMENDAÇÕES</h2>
+            <span class="badge-danger">AÇÃO URGENTE NECESSÁRIA</span>
+        </div>
+        <div class="contract-body">
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--danger); margin-bottom: 1rem;">Síntese das Falhas Estruturais</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #fecaca;">
+                        <strong style="color: var(--danger);">1.</strong> <strong>Inaplicabilidade de normas:</strong> Fundamentação legal incorreta em 2 dos 3 contratos, com aplicação de lei revogada ou de dispositivo inadequado ao objeto.
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #fecaca;">
+                        <strong style="color: var(--danger);">2.</strong> <strong>Extrapolação de limites:</strong> Acréscimo de 46,62% (limite: 25%) — violação objetiva e incontroversa.
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #fecaca;">
+                        <strong style="color: var(--danger);">3.</strong> <strong>Falta de planejamento:</strong> 10 aditivos em um contrato e 7 em outro evidenciam ausência de estimativa realista no edital original.
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <strong style="color: var(--danger);">4.</strong> <strong>Opacidade:</strong> Extratos publicados sem informações essenciais para fiscalização (justificativas, pareceres, certidões).
+                    </li>
+                </ul>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #fecaca;">
+                <h3 style="color: var(--danger); margin-bottom: 1rem;">🎯 Recomendações Imediatas</h3>
+                <ol style="padding-left: 1.2rem; line-height: 2;">
+                    <li><strong>Cancelamento/revisão do 7º aditivo do Contrato 061/2022</strong> — o acréscimo de 46,62% é legalmente insustentável. Deve-se realizar nova licitação para o valor excedente.</li>
+                    <li><strong>Auditoria especial no Contrato 065/2022</strong> — verificar se o prazo total não ultrapassou 60 meses (Lei 8.666) ou 10 anos (Lei 14.133).</li>
+                    <li><strong>Correção da fundamentação legal</strong> — adequar o Contrato 024/2025 ao art. 111 da Lei 14.133/2021 (obra não concluída) ou ao regime da Lei 8.666/93.</li>
+                    <li><strong>Publicação integral dos processos administrativos</strong> — incluir pareceres técnicos, certidões, atestos de vantajosidade e pesquisas de preço.</li>
+                    <li><strong>Encaminhamento ao TCE-PA e MPF</strong> — para apuração de responsabilização administrativa, civil e penal.</li>
+                </ol>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #fffbeb; border-radius: 8px; border: 1px solid #fde68a;">
+                <p style="font-size: 0.9rem; color: #92400e; margin: 0;">
+                    <strong>⚖️ Nota:</strong> Esta análise é baseada exclusivamente nos extratos publicados no Diário Oficial. A apuração completa das irregularidades depende do acesso aos processos administrativos originais. Recomenda-se ação do Ministério Público e do Tribunal de Contas do Estado do Pará.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Análise jurídica realizada com base na legislação vigente e jurisprudência dos Tribunais de Contas.</p>
+        <p>Fonte: Diário Oficial dos Municípios do Estado do Pará — Edição 4003, 14/05/2026.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Documento gerado em 14/05/2026 para fins de fiscalização e transparência pública.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
